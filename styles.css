@@ -1,0 +1,40 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    border: 1px solid black;
+}
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+td {
+    padding-left: 1vw;
+}
+
+.year {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    font-size: 2rem;
+    background-color: black;
+    color: white;
+    padding: 0px 2vw 0px 2vw;
+}
+
+.header {
+    padding-left: 1vw;
+    text-align: left;
+    background-color: lightgray;
+}
+
+/* Not working for some reason??? */
+.hours {
+    border-top: 1px solid black;
+    background-color: white;
+}
