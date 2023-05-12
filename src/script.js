@@ -5,6 +5,12 @@ window.onload = function() {
     localStorage.setItem("creativeArts", JSON.stringify(creativeArts));
     let parsedCreativeArts = JSON.parse(localStorage.getItem("creativeArts"));
 
+    localStorage.setItem("naturalSciences", JSON.stringify(naturalSciences));
+    let parsedNaturalSciences = JSON.parse(localStorage.getItem("naturalSciences"));
+
+    localStorage.setItem("naturalSciencesLabs", JSON.stringify(naturalSciencesLabs));
+    let parsedNaturalSciencesLabs = JSON.parse(localStorage.getItem("naturalSciencesLabs"));
+
     function showTable(parsedData, tableNum, courseStart, courseNum) {
         var totalHoursFall = 0;
         var totalHoursSpring = 0;
@@ -124,7 +130,7 @@ window.onload = function() {
     }
 
     function addCourseSelectors(courseStart, courseNum) {
-        var creativeArtsDropdown;
+        var dropdown;
 
         for (i = courseStart - 1; i < courseNum; i++) {
             if (parsedData[i].classType !== "None") {
@@ -132,26 +138,43 @@ window.onload = function() {
                 document.querySelectorAll('#i' + i)[1].removeEventListener("click", showDescription);
                 document.querySelectorAll('#i' + i)[2].removeEventListener("click", showDescription);
             }
-            if (parsedData[i].classType === "Creative Arts") {
-                creativeArtsDropdown = 
-                    `<select class="creativeArts">
-                        <option value="default" selected>Select Course</option>`;
-
-                for (y = 0; y < parsedCreativeArts.length; y++) {
-                    var myOption = `<option value=${y}>${parsedCreativeArts[y].num}</option>`;
-                    creativeArtsDropdown += myOption;
-                }
-
-                creativeArtsDropdown += `</select>`
-
-                document.querySelectorAll('#i' + i)[0].innerHTML += creativeArtsDropdown;
+            if (parsedData[i].classType === "Creative Arts") {  
+                addSpecifiedCourseSelector("creativeArts", parsedCreativeArts);
+            }
+            else if (parsedData[i].classType === "Natural Sciences") {
+                addSpecifiedCourseSelector("naturalSciences", parsedNaturalSciences);
+            }
+            else if (parsedData[i].classType === "Natural Sciences Lab") {
+                addSpecifiedCourseSelector("naturalSciencesLabs", parsedNaturalSciencesLabs);
             }
         }
 
-        var creativeArtsDropdown = document.getElementsByClassName("creativeArts");
-        for (var i = 0; i < creativeArtsDropdown.length; i++) {
-            creativeArtsDropdown[i].addEventListener("click", function() {
-                showDropdownDescription(this.options[this.selectedIndex], parsedCreativeArts)
+
+        addClickToDropdown("creativeArts", parsedCreativeArts);
+        addClickToDropdown("naturalSciences", parsedNaturalSciences);
+        addClickToDropdown("naturalSciencesLabs", parsedNaturalSciencesLabs);
+    }
+
+    function addSpecifiedCourseSelector(className, data) {
+        dropdown = 
+        `<select class=${className}>
+            <option value="default" selected>Select Course</option>`;
+
+        for (y = 0; y < data.length; y++) {
+            var myOption = `<option value=${y}>${data[y].num}</option>`;
+            dropdown += myOption;
+        }
+
+        dropdown += `</select>`
+
+        document.querySelectorAll('#i' + i)[0].innerHTML += dropdown;
+    }
+
+    function addClickToDropdown(className, data) {
+        var dropdown = document.getElementsByClassName(className);
+        for (var i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function() {
+                showDropdownDescription(this.options[this.selectedIndex], data)
             });
         }
     }
