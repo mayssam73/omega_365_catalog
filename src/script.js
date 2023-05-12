@@ -82,9 +82,6 @@ window.onload = function() {
         }
 
         currDescription.innerHTML = description;
-
-        // var prevOpenDescription = document.getElementsByClassName("show")[0];
-        // prevOpenDescription.classList.remove("show");
         currDescription.classList.add("show");
     }
 
@@ -122,9 +119,6 @@ window.onload = function() {
             }
 
             currDescription.innerHTML = description;
-
-            // var prevOpenDescription = document.getElementsByClassName("show")[0];
-            // prevOpenDescription.classList.remove("show");
             currDescription.classList.add("show");
         }
     }
