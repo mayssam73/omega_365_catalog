@@ -11,7 +11,7 @@ window.onload = function() {
         
         let table =
             `<tr>
-                <th class="year" rowspan="7">Year ${tableNum}</th>
+                <th class="year" rowspan="8">Year ${tableNum}</th>
                 <th class="header" colspan="3">Semester 1 Fall</th>
                 <th class="header" colspan="3">Semester 2 Spring</th>
                 <th class="header">Total</th>
@@ -28,8 +28,10 @@ window.onload = function() {
                 <td></td>
             </tr>`;
             
-            totalHoursFall += parsedData[i - 1].creditHours;
-            totalHoursSpring += parsedData[i - 1].creditHours;
+            if (parsedData[i - 1].creditHours !== "" && parsedData[i].creditHours != "") {
+                totalHoursFall += parsedData[i - 1].creditHours;
+                totalHoursSpring += parsedData[i].creditHours;
+            }
         }
         
         table += 
@@ -68,7 +70,7 @@ window.onload = function() {
         if (this.id <= 10) {
             currDescription = document.getElementById("description1");
         }
-        else if (this.id <= 21) {
+        else if (this.id <= 22) {
             currDescription = document.getElementById("description2");
         }
         else if (this.id <= 32) {
@@ -108,7 +110,7 @@ window.onload = function() {
             if (parentId <= 10) {
                 currDescription = document.getElementById("description1");
             }
-            else if (parentId <= 21) {
+            else if (parentId <= 22) {
                 currDescription = document.getElementById("description2");
             }
             else if (parentId <= 32) {
@@ -162,8 +164,8 @@ window.onload = function() {
     showTable(parsedData, 1, 1, 10);
     addCourseSelectors(1, 10);
 
-    showTable(parsedData, 2, 11, 21);
-    addCourseSelectors(11, 21);
+    showTable(parsedData, 2, 11, 22);
+    addCourseSelectors(11, 22);
     // showTable(parsedData, 3, 23, 10);
     // showTable(parsedData, 4, 34, 10);
 

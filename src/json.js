@@ -116,76 +116,103 @@ const data = [{
     classType: "None"
 },
 {
-    num: "TEST",
-    name: "First Year Writing II",
+    num: "COSC 3360",
+    name: "Fundamentals of Operating Systems",
     creditHours: 3,
-    prereq: "ENGL 1301 or equivalent.",
-    description: "Detailed study of the principles of rhetoric as applied to analyzing and writing argumentative and persuasive essays; principles and methods of research, culminating in writing a substantial research paper.",
+    prereq: "COSC majors and minors: A grade of C- or better in COSC 2436 and COSC 2425; CpE majors: A grade of C- or better in COSC 2320 AND ECE 5367.",
+    description: "Operating system; sequential processes, concurrent processes, deadlock, mutual exclusion, semaphores; memory management, processor management, peripheral device management.",
     repeatability: "No",
     classType: "None"
 },
 {
-    num: "TEST",
-    name: "The U.S. to 1877",
+    num: "MATH 2318",
+    name: "Linear Algebra OR",
+    creditHours: 3,
+    prereq: "Credit for or concurrent enrollment in MATH 2414.",
+    description: "Solutions of systems of linear equations, matrices, vector spaces, linear transformations, similarity, eigenvalues and eigenvectors.",
+    repeatability: "No",
+    classType: "None"
+},
+{
+    num: "MATH 3336",
+    name: "Discrete Mathematics OR",
+    creditHours: 3,
+    prereq: "MATH 2318 or equivalent.",
+    description: "Topics selected from logic, set theory, combinatorics, and graph theory.",
+    repeatability: "No",
+    classType: "None"
+},
+{
+    num: "MATH 3321",
+    name: "Engineering Mathematics",
+    creditHours: "",
+    prereq: "MATH 2414.",
+    description: "First order ordinary differential equations and initial value problems; higher order differential equations; vector spaces, matrices, determinants, eigenvectors and eigenvalues; applications to systems of first order equations; Laplace transforms.",
+    repeatability: "No",
+    classType: "None"
+},
+{
+    num: "COSC 3336",
+    name: "Computing Structures",
+    creditHours: 3,
+    prereq: "A grade of C- or better in MATH 2318 or MATH 3321, and COSC 2425.",
+    description: "Introduce methods of reasoning used in computer science; logical notation and proof methods; induction and recursion; sets, functions, and relations; graphs; the growth of functions; annotated programs and loop invariants.",
+    repeatability: "No",
+    classType: "None"
+},
+{
+    num: "",
+    name: "Natural Science Approved Course",
     creditHours: 3,
     prereq: "None",
-    description: "The social, economic, and political history of the United States to 1877.",
+    description: "None",
     repeatability: "No",
-    classType: "None"
+    classType: "naturalSciences"
 },
 {
-    num: "TEST",
-    name: "The U.S. Since 1877",
+    num: "",
+    name: "Natural Science Approved Course",
     creditHours: 3,
     prereq: "None",
-    description: "The social, economic, and political history of the United States since 1877.",
+    description: "None",
     repeatability: "No",
-    classType: "None"
+    classType: "naturalSciences"
 },
 {
-    num: "TEST",
-    name: "US and Texas Constitution and Politics",
+    num: "",
+    name: "Natural Science Approved Laboratory",
+    creditHours: 1,
+    prereq: "None",
+    description: "None",
+    repeatability: "No",
+    classType: "naturalSciencesLab"
+},
+{
+    num: "",
+    name: "Natural Science Approved Laboratory",
+    creditHours: 1,
+    prereq: "None",
+    description: "None",
+    repeatability: "No",
+    classType: "naturalSciencesLab"
+},
+{
+    num: "",
+    name: "",
+    creditHours: "",
+    prereq: "",
+    description: "",
+    repeatability: "",
+    classType: ""
+},
+{
+    num: "CORE",
+    name: "Language, Philosophy, and Culture",
     creditHours: 3,
     prereq: "None",
-    description: "Introduction to the constitutions and politics of the United States and Texas, emphasizing constitutional structure, federalism, separation of powers, limited government, public opinion, elections, and civil liberties. (Introductory category).",
+    description: "None",
     repeatability: "No",
-    classType: "None"
-},
-{
-    num: "TEST",
-    name: "US Government: Congress, President, & Courts",
-    creditHours: 3,
-    prereq: "None",
-    description: "Introduction to the institutions of government with an emphasis on the congress, the president, and the federal courts. (Introductory category).",
-    repeatability: "No",
-    classType: "None"
-},
-{
-    num: "TEST",
-    name: "Calculus I",
-    creditHours: 4,
-    prereq: "Credit for MATH 2312 with a grade of C- or higher, or a satisfactory score on a placement examination.",
-    description: "Calculus of rational functions, limits, derivatives, applications of the derivative, antiderivatives, the definite integral with applications, mean value theorem, fundamental theorem of calculus, and numerical integration.",
-    repeatability: "Yes",
-    classType: "None"
-},
-{
-    num: "TEST",
-    name: "Calculus II",
-    creditHours: 4,
-    prereq: "Credit for MATH 2413 with a grade of C- or higher.",
-    description: "Calculus of transcendental functions: additional techniques and applications of integration, indeterminate forms, improper integrals, Taylor’s formula, and infinite series.",
-    repeatability: "Yes",
-    classType: "None"
-},
-{
-    num: "TEST",
-    name: "Calculus II",
-    creditHours: 4,
-    prereq: "Credit for MATH 2413 with a grade of C- or higher.",
-    description: "Calculus of transcendental functions: additional techniques and applications of integration, indeterminate forms, improper integrals, Taylor’s formula, and infinite series.",
-    repeatability: "Yes",
-    classType: "None"
+    classType: "culture"
 },
 ]
 
