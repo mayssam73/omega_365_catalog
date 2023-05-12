@@ -66,3 +66,7 @@ select {
 .show {
     display: block;
 }
+
+.clickable {
+    cursor: pointer;
+}

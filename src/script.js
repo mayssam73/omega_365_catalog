@@ -24,13 +24,16 @@ window.onload = function() {
             </tr>`;
 
         for (i = courseStart; i < courseNum; i+=2) {
+            var clickable1 = parsedData[i - 1].classType === "None" ? "clickable" : "notClickable";
+            var clickable2 = parsedData[i].classType === "None" ? "clickable" : "notClickable";
+
             table += `<tr>
-                <td class="clickable" id="i${i-1}">${parsedData[i - 1].num}</td>
-                <td class="clickable" id="i${i-1}">${parsedData[i - 1].name}</td>
-                <td class="clickable" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
-                <td class="clickable" id="i${i}">${parsedData[i].num}</td>
-                <td class="clickable" id="i${i}">${parsedData[i].name}</td>
-                <td class="clickable" id="i${i}">${parsedData[i].creditHours}</td>
+                <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].num}</td>
+                <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].name}</td>
+                <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
+                <td class="${clickable2}" id="i${i}">${parsedData[i].num}</td>
+                <td class="${clickable2}" id="i${i}">${parsedData[i].name}</td>
+                <td class="${clickable2}" id="i${i}">${parsedData[i].creditHours}</td>
                 <td></td>
             </tr>`;
             
@@ -131,11 +134,6 @@ window.onload = function() {
 
     function addCourseSelectors(courseStart, courseNum) {
         for (i = courseStart - 1; i < courseNum; i++) {
-            if (parsedData[i].classType !== "None") {
-                document.querySelectorAll('#i' + i)[0].removeEventListener("click", showDescription);
-                document.querySelectorAll('#i' + i)[1].removeEventListener("click", showDescription);
-                document.querySelectorAll('#i' + i)[2].removeEventListener("click", showDescription);
-            }
             if (parsedData[i].classType === "Creative Arts") {  
                 addSpecifiedCourseSelector("creativeArts", parsedCreativeArts);
             }
