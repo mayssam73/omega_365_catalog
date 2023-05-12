@@ -67,13 +67,14 @@ window.onload = function() {
             `
 
         var currDescription;
-        if (this.id <= 10) {
+
+        if (id <= 9) {
             currDescription = document.getElementById("description1");
         }
-        else if (this.id <= 22) {
+        else if (id <= 22) {
             currDescription = document.getElementById("description2");
         }
-        else if (this.id <= 32) {
+        else if (id <= 32) {
             currDescription = document.getElementById("description3");
         }
         else {
@@ -107,7 +108,7 @@ window.onload = function() {
             var parent = object.parentNode.parentNode;
             var parentId = parent.id.slice(1);
 
-            if (parentId <= 10) {
+            if (parentId <= 9) {
                 currDescription = document.getElementById("description1");
             }
             else if (parentId <= 22) {

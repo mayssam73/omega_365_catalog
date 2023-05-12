@@ -154,7 +154,7 @@ const data = [{
 {
     num: "COSC 3336",
     name: "Computing Structures",
-    creditHours: 3,
+    creditHours: "",
     prereq: "A grade of C- or better in MATH 2318 or MATH 3321, and COSC 2425.",
     description: "Introduce methods of reasoning used in computer science; logical notation and proof methods; induction and recursion; sets, functions, and relations; graphs; the growth of functions; annotated programs and loop invariants.",
     repeatability: "No",
@@ -219,7 +219,7 @@ const data = [{
 const creativeArts = [
     {
         num: "ARTS 1304",
-        name: "Art History II (15th Century to the Present",
+        name: "Art History II (15th Century to the Present)",
         creditHours: 3,
         prereq: "ENGL 1301.",
         description: "Art and its relationship to society in and for which it was made from the Renaissance to the present.",
