@@ -130,8 +130,6 @@ window.onload = function() {
     }
 
     function addCourseSelectors(courseStart, courseNum) {
-        var dropdown;
-
         for (i = courseStart - 1; i < courseNum; i++) {
             if (parsedData[i].classType !== "None") {
                 document.querySelectorAll('#i' + i)[0].removeEventListener("click", showDescription);
@@ -148,7 +146,6 @@ window.onload = function() {
                 addSpecifiedCourseSelector("naturalSciencesLabs", parsedNaturalSciencesLabs);
             }
         }
-
 
         addClickToDropdown("creativeArts", parsedCreativeArts);
         addClickToDropdown("naturalSciences", parsedNaturalSciences);
