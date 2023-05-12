@@ -4,6 +4,7 @@
 
 table {
     border: 1px solid black;
+    width: 100%;
 }
 
 tr:nth-child(odd) {
@@ -27,6 +28,10 @@ p {
     letter-spacing: 1px;
 }
 
+select {
+    margin-left: 1vw;
+}
+
 .year {
     writing-mode: vertical-lr;
     transform: rotate(180deg);
@@ -48,7 +53,7 @@ p {
     background-color: white;
 }
 
-#description {
+#description1, #description2, #description3, #description4 {
     border: 1px solid black;
     padding: 10px 25px 25px 25px;
     background-color: #f2f2f2;
