@@ -17,7 +17,7 @@ window.onload = function() {
         
         let table =
             `<tr>
-                <th class="year" rowspan="8">Year ${tableNum}</th>
+                <th class="year" rowspan="9">Year ${tableNum}</th>
                 <th class="header" colspan="3">Semester 1 Fall</th>
                 <th class="header" colspan="3">Semester 2 Spring</th>
                 <th class="header">Total</th>
@@ -65,14 +65,15 @@ window.onload = function() {
 
         let description = 
             `<h3>${parsedData[id].num} - ${parsedData[id].name}</h3>
-            <h4>Credit Hours: ${parsedData[id].creditHours}</h4>
+            <h4>Credit Hours:</h4>
+            <p>${parsedData[id].creditHours}</p>
             <hr></hr>
             <h4>Prerequisite:</h4>
-            <p> ${parsedData[id].prereq}</p><br />
+            <p>${parsedData[id].prereq}</p><br />
             <h4>Description:</h4>
-            <p> ${parsedData[id].description}</p><br />
+            <p>${parsedData[id].description}</p><br />
             <h4>Repeatability:</h4>
-            <p> ${parsedData[id].repeatability}</p>
+            <p>${parsedData[id].repeatability}</p>
             `
 
         var currDescription;
@@ -80,7 +81,7 @@ window.onload = function() {
         if (id <= 9) {
             currDescription = document.getElementById("description1");
         }
-        else if (id <= 22) {
+        else if (id <= 24) {
             currDescription = document.getElementById("description2");
         }
         else if (id <= 32) {
@@ -100,14 +101,15 @@ window.onload = function() {
         if (value !== "default") {
             let description = 
                 `<h3>${myData[value].num} - ${myData[value].name}</h3>
-                <h4>Credit Hours: ${myData[value].creditHours}</h4>
+                <h4>Credit Hours:</h4>
+                <p>${myData[value].creditHours}</p>
                 <hr></hr>
                 <h4>Prerequisite:</h4>
-                <p> ${myData[value].prereq}</p><br />
+                <p>${myData[value].prereq}</p><br />
                 <h4>Description:</h4>
-                <p> ${myData[value].description}</p><br />
+                <p>${myData[value].description}</p><br />
                 <h4>Repeatability:</h4>
-                <p> ${myData[value].repeatability}</p>
+                <p>${myData[value].repeatability}</p>
                 `
 
             var currDescription;
@@ -117,7 +119,7 @@ window.onload = function() {
             if (parentId <= 9) {
                 currDescription = document.getElementById("description1");
             }
-            else if (parentId <= 22) {
+            else if (parentId <= 24) {
                 currDescription = document.getElementById("description2");
             }
             else if (parentId <= 32) {
@@ -177,9 +179,37 @@ window.onload = function() {
     showTable(parsedData, 1, 1, 10);
     addCourseSelectors(1, 10);
 
-    showTable(parsedData, 2, 11, 22);
-    addCourseSelectors(11, 22);
+    showTable(parsedData, 2, 11, 24);
+    addCourseSelectors(11, 24);
     // showTable(parsedData, 3, 23, 10);
     // showTable(parsedData, 4, 34, 10);
 
+    function addEditButton() {
+        for (i = 0; i < parsedData.length; i++) {
+            var tableData = document.querySelectorAll("#i" + i)[1];
+            let editButton = `<button class="edit">Edit</button>`;
+            tableData.innerHTML += editButton;
+            
+            let allEditBtns = document.querySelectorAll(".edit");
+            let lastListItem = allEditBtns[allEditBtns.length - 1];
+
+            lastListItem.addEventListener("click", enableEditDescription);
+        }
+    }
+
+    function enableEditDescription() {
+        var allShownDescriptions = document.getElementsByClassName("show");
+
+        for (i = 0; i < allShownDescriptions.length; i++) {
+            var descChildren = allShownDescriptions[i].children;
+            //Fix this to make prettier; get elements by h3 or p instead
+            descChildren[0].setAttribute("contenteditable", true);
+            descChildren[2].setAttribute("contenteditable", true);
+            descChildren[5].setAttribute("contenteditable", true);
+            descChildren[8].setAttribute("contenteditable", true);
+            descChildren[11].setAttribute("contenteditable", true);
+        }
+    }
+
+    addEditButton();
 }

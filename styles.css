@@ -17,6 +17,7 @@ tr:nth-child(even) {
 
 td {
     padding-left: 1vw;
+    padding-right: 1vw;
 }
 
 h4 {
@@ -26,10 +27,6 @@ h4 {
 p {
     display: inline;
     letter-spacing: 1px;
-}
-
-select {
-    margin-left: 1vw;
 }
 
 .year {
@@ -69,4 +66,8 @@ select {
 
 .clickable {
     cursor: pointer;
+}
+
+.edit {
+    margin-left: 0.5vw;
 }
