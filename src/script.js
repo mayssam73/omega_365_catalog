@@ -29,11 +29,11 @@ window.onload = function() {
 
             table += `<tr>
                 <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].num}</td>
-                <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].name}</td>
-                <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
+                <td id="i${i-1}">${parsedData[i - 1].name}</td>
+                <td id="i${i-1}">${parsedData[i - 1].creditHours}</td>
                 <td class="${clickable2}" id="i${i}">${parsedData[i].num}</td>
-                <td class="${clickable2}" id="i${i}">${parsedData[i].name}</td>
-                <td class="${clickable2}" id="i${i}">${parsedData[i].creditHours}</td>
+                <td id="i${i}">${parsedData[i].name}</td>
+                <td id="i${i}">${parsedData[i].creditHours}</td>
                 <td></td>
             </tr>`;
             
@@ -187,13 +187,18 @@ window.onload = function() {
     function addEditButton() {
         for (i = 0; i < parsedData.length; i++) {
             var tableData = document.querySelectorAll("#i" + i)[1];
-            let editButton = `<button class="edit">Edit</button>`;
+            let editButton = `<button class="edit" id="i${i}">Edit</button>`;
             tableData.innerHTML += editButton;
-            
-            let allEditBtns = document.querySelectorAll(".edit");
-            let lastListItem = allEditBtns[allEditBtns.length - 1];
+        }
 
-            lastListItem.addEventListener("click", enableEditDescription);
+        addClickToEdit();
+    }
+
+    function addClickToEdit() {
+        let allEditBtns = document.getElementsByClassName("edit");
+        for (var i = 0; i < allEditBtns.length; i++) {
+            allEditBtns[i].addEventListener("click", showDescription);
+            allEditBtns[i].addEventListener("click", enableEditDescription);
         }
     }
 
@@ -202,7 +207,7 @@ window.onload = function() {
 
         for (i = 0; i < allShownDescriptions.length; i++) {
             var descChildren = allShownDescriptions[i].children;
-            //Fix this to make prettier; get elements by h3 or p instead
+            //Fix this to make prettier; get elements by h3 or p
             descChildren[0].setAttribute("contenteditable", true);
             descChildren[2].setAttribute("contenteditable", true);
             descChildren[5].setAttribute("contenteditable", true);
