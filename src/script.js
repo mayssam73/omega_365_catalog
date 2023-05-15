@@ -91,6 +91,11 @@ window.onload = function() {
             currDescription = document.getElementById("description4");
         }
 
+        var prevDescription = document.getElementsByClassName("show");
+        if (prevDescription[0] !== undefined) {
+            prevDescription[0].classList.replace("show", "hide");
+        }
+
         currDescription.innerHTML = description;
         currDescription.classList.add("show");
     }
@@ -176,18 +181,10 @@ window.onload = function() {
         }
     }
 
-    showTable(parsedData, 1, 1, 10);
-    addCourseSelectors(1, 10);
-
-    showTable(parsedData, 2, 11, 24);
-    addCourseSelectors(11, 24);
-    // showTable(parsedData, 3, 23, 10);
-    // showTable(parsedData, 4, 34, 10);
-
     function addEditButton() {
         for (i = 0; i < parsedData.length; i++) {
             var tableData = document.querySelectorAll("#i" + i)[1];
-            let editButton = `<button class="edit" id="i${i}">Edit</button>`;
+            let editButton = `<button class="edit" id="e${i}">Edit</button>`;
             tableData.innerHTML += editButton;
         }
 
@@ -203,18 +200,75 @@ window.onload = function() {
     }
 
     function enableEditDescription() {
-        var allShownDescriptions = document.getElementsByClassName("show");
+        var id = this.id.slice(1);
+        var shownDescription = document.getElementsByClassName("show")[0];
+        
+        let submitButton = `<br><br><button class="submit">Submit</button>`;
 
-        for (i = 0; i < allShownDescriptions.length; i++) {
-            var descChildren = allShownDescriptions[i].children;
-            //Fix this to make prettier; get elements by h3 or p
-            descChildren[0].setAttribute("contenteditable", true);
-            descChildren[2].setAttribute("contenteditable", true);
-            descChildren[5].setAttribute("contenteditable", true);
-            descChildren[8].setAttribute("contenteditable", true);
-            descChildren[11].setAttribute("contenteditable", true);
+        var editable = [0, 2, 5, 8, 11];
+        shownDescription.innerHTML += submitButton;
+        addClickToSubmit(id, shownDescription);
+
+        var descChildren = shownDescription.children;
+
+        for (i = 0; i < editable.length; i++) {  
+            descChildren[editable[i]].setAttribute("contenteditable", true);
+            //descChildren[editable[i]].addEventListener("input", saveEditedChanges);
         }
     }
+
+    function addClickToSubmit(id, description) {
+        let allSubmitBtns = document.getElementsByClassName("submit");
+        for (var i = 0; i < allSubmitBtns.length; i++) {
+            allSubmitBtns[i].addEventListener("click", function () {
+                saveEditedChanges(id, description)
+            });
+        }
+    }
+
+    function saveEditedChanges(id, description) {
+        var splitNumName = description.children[0].innerText.trim().split("-");
+        
+        parsedData[id].num = splitNumName[0];
+        parsedData[id].name = splitNumName[1];
+        parsedData[id].creditHours = description.children[2].innerHTML;
+        parsedData[id].prereq = description.children[5].innerHTML;
+        parsedData[id].description = description.children[8].innerHTML;
+        parsedData[id].repeatability = description.children[11].innerHTML;
+
+        var displayedClassInfo = document.querySelectorAll("#i" + id);
+        if (parsedData[id].classType === "None") {
+            displayedClassInfo[0].innerHTML = splitNumName[0];
+        }
+        else {
+            var splitTextDropdown0 = displayedClassInfo[0].innerHTML.trim().split("<")
+            if (splitTextDropdown0[0] !== "") {
+                displayedClassInfo[0].removeChild(displayedClassInfo[0].firstChild);
+            }
+            
+            displayedClassInfo[0].insertAdjacentHTML("afterbegin", splitNumName[0]);
+        }
+
+        var splitTextDropdown1 = displayedClassInfo[1].innerHTML.trim().split("<");
+        if (splitTextDropdown1[0] != "") {  
+            displayedClassInfo[1].removeChild(displayedClassInfo[1].firstChild);
+        }
+
+        displayedClassInfo[1].insertAdjacentHTML("afterbegin", splitNumName[1]);
+        
+        displayedClassInfo[2].innerHTML = description.children[2].innerHTML;
+
+        localStorage.setItem("data", JSON.stringify(parsedData));
+        parsedData = JSON.parse(localStorage.getItem("data"));
+    }
+
+    showTable(parsedData, 1, 1, 10);
+    addCourseSelectors(1, 10);
+
+    showTable(parsedData, 2, 11, 24);
+    addCourseSelectors(11, 24);
+    // showTable(parsedData, 3, 23, 10);
+    // showTable(parsedData, 4, 34, 10);
 
     addEditButton();
 }
