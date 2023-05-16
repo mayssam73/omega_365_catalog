@@ -1,32 +1,13 @@
 window.onload = function() {
-    localStorage.setItem("data", JSON.stringify(data));
     let parsedData = JSON.parse(localStorage.getItem("data"));
-
-    localStorage.setItem("creativeArts", JSON.stringify(creativeArts));
     let parsedCreativeArts = JSON.parse(localStorage.getItem("creativeArts"));
-
-    localStorage.setItem("naturalSciences", JSON.stringify(naturalSciences));
     let parsedNaturalSciences = JSON.parse(localStorage.getItem("naturalSciences"));
-
-    localStorage.setItem("naturalSciencesLabs", JSON.stringify(naturalSciencesLabs));
     let parsedNaturalSciencesLabs = JSON.parse(localStorage.getItem("naturalSciencesLabs"));
-    
-    localStorage.setItem("philosophyCulture", JSON.stringify(philosophyCulture));
     let parsedPhilosophyCulture = JSON.parse(localStorage.getItem("philosophyCulture"));
-
-    localStorage.setItem("writingDisciplines", JSON.stringify(writingDisciplines));
     let parsedWritingDisciplines = JSON.parse(localStorage.getItem("writingDisciplines"));
-
-    localStorage.setItem("socialBehavioral", JSON.stringify(socialBehavioral));
     let parsedSocialBehavioral = JSON.parse(localStorage.getItem("socialBehavioral"));
-
-    localStorage.setItem("freeElectives3", JSON.stringify(freeElectives3));
     let parsedFreeElectives3 = JSON.parse(localStorage.getItem("freeElectives3"));
-
-    localStorage.setItem("freeElectives1", JSON.stringify(freeElectives1));
     let parsedFreeElectives1 = JSON.parse(localStorage.getItem("freeElectives1"));
-
-    localStorage.setItem("coscElectives", JSON.stringify(coscElectives));
     let parsedCoscElectives = JSON.parse(localStorage.getItem("coscElectives"));
 
     function showTable(parsedData, tableNum, courseStart, courseNum) {
