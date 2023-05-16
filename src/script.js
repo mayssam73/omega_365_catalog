@@ -99,10 +99,10 @@ window.onload = function() {
         if (id <= 9) {
             currDescription = document.getElementById("description1");
         }
-        else if (id <= 24) {
+        else if (id <= 23) {
             currDescription = document.getElementById("description2");
         }
-        else if (id <= 36) {
+        else if (id <= 35) {
             currDescription = document.getElementById("description3");
         }
         else {
@@ -142,15 +142,20 @@ window.onload = function() {
             if (parentId <= 9) {
                 currDescription = document.getElementById("description1");
             }
-            else if (parentId <= 24) {
+            else if (parentId <= 23) {
                 currDescription = document.getElementById("description2");
             }
-            else if (parentId <= 36) {
+            else if (parentId <= 35) {
                 currDescription = document.getElementById("description3");
             }
             else {
                 currDescription = document.getElementById("description4");
             }
+
+            var prevDescription = document.getElementsByClassName("show");
+            if (prevDescription[0] !== undefined) {
+                prevDescription[0].classList.replace("show", "hide");
+            }    
 
             currDescription.innerHTML = description;
             currDescription.classList.add("show");
@@ -289,9 +294,13 @@ window.onload = function() {
         if (shownDescription !== undefined) {
             let submitButton = `<br><br><button class="submit">Submit</button>`;
             var submitBtnExists = document.getElementsByClassName("submit")[0];
-            if (submitBtnExists === undefined) {       
-                shownDescription.innerHTML += submitButton;
+            if (submitBtnExists !== undefined) {    
+                submitBtnExists.previousSibling.remove();
+                submitBtnExists.previousSibling.remove();   
+                submitBtnExists.remove();
             }
+
+            shownDescription.innerHTML += submitButton;
 
             addClickToSubmit(id, shownDescription);
     
