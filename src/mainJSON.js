@@ -285,7 +285,7 @@ const data = [
         prereq: "None.",
         description: "None.",
         repeatability: "No",
-        classType: "Free Electives"
+        classType: "Free Electives 3"
     },
     {
         num: "",

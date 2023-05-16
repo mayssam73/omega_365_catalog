@@ -236,7 +236,48 @@ window.onload = function() {
     function addClickToEdit() {
         let allEditBtns = document.getElementsByClassName("edit");
         for (var i = 0; i < allEditBtns.length; i++) {
-            allEditBtns[i].addEventListener("click", showDescription);
+            var tableData = document.getElementById("i" + i);
+            var selectChild = tableData.getElementsByTagName("select")[0];
+
+            if (selectChild === undefined) {
+                allEditBtns[i].addEventListener("click", showDescription);
+            }
+            else{
+                var data;
+
+                if (selectChild.className === "creativeArts") {  
+                    data = parsedCreativeArts;
+                }
+                else if (selectChild.className === "naturalSciences") {
+                    data = parsedNaturalSciences;
+                }
+                else if (selectChild.className === "naturalSciencesLabs") {
+                    data = parsedNaturalSciencesLabs;
+                }
+                else if (selectChild.className === "philosophyCulture") {
+                    data = parsedPhilosophyCulture;
+                }
+                else if (selectChild.className === "writingDisciplines") {
+                    data = parsedWritingDisciplines;
+                }
+                else if (selectChild.className === "socialBehavioral") {
+                    data = parsedSocialBehavioral;
+                }
+                else if (selectChild.className === "freeElectives3") {
+                    data = parsedFreeElectives3;
+                }
+                else if (selectChild.className === "freeElectives1") {
+                    data = parsedFreeElectives1;
+                }
+                else if (selectChild.className === "coscElectives") {
+                    data = parsedCoscElectives;
+                }
+
+                selectChild.addEventListener("click", function() {
+                    showDropdownDescription(selectChild.options[selectChild.selectedIndex], data)
+                });
+            }
+            
             allEditBtns[i].addEventListener("click", enableEditDescription);
         }
     }
@@ -246,9 +287,12 @@ window.onload = function() {
         var shownDescription = document.getElementsByClassName("show")[0];
         
         let submitButton = `<br><br><button class="submit">Submit</button>`;
+        var submitBtnExists = document.getElementsByClassName("submit")[0];
+        if (submitBtnExists === undefined) {       
+            shownDescription.innerHTML += submitButton;
+        }
 
         var editable = [0, 2, 5, 8, 11];
-        shownDescription.innerHTML += submitButton;
         addClickToSubmit(id, shownDescription);
 
         var descChildren = shownDescription.children;
