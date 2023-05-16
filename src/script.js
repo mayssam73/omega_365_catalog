@@ -10,6 +10,24 @@ window.onload = function() {
 
     localStorage.setItem("naturalSciencesLabs", JSON.stringify(naturalSciencesLabs));
     let parsedNaturalSciencesLabs = JSON.parse(localStorage.getItem("naturalSciencesLabs"));
+    
+    localStorage.setItem("philosophyCulture", JSON.stringify(philosophyCulture));
+    let parsedPhilosophyCulture = JSON.parse(localStorage.getItem("philosophyCulture"));
+
+    localStorage.setItem("writingDisciplines", JSON.stringify(writingDisciplines));
+    let parsedWritingDisciplines = JSON.parse(localStorage.getItem("writingDisciplines"));
+
+    localStorage.setItem("socialBehavioral", JSON.stringify(socialBehavioral));
+    let parsedSocialBehavioral = JSON.parse(localStorage.getItem("socialBehavioral"));
+
+    localStorage.setItem("freeElectives3", JSON.stringify(freeElectives3));
+    let parsedFreeElectives3 = JSON.parse(localStorage.getItem("freeElectives3"));
+
+    localStorage.setItem("freeElectives1", JSON.stringify(freeElectives1));
+    let parsedFreeElectives1 = JSON.parse(localStorage.getItem("freeElectives1"));
+
+    localStorage.setItem("coscElectives", JSON.stringify(coscElectives));
+    let parsedCoscElectives = JSON.parse(localStorage.getItem("coscElectives"));
 
     function showTable(parsedData, tableNum, courseStart, courseNum) {
         var totalHoursFall = 0;
@@ -84,7 +102,7 @@ window.onload = function() {
         else if (id <= 24) {
             currDescription = document.getElementById("description2");
         }
-        else if (id <= 32) {
+        else if (id <= 36) {
             currDescription = document.getElementById("description3");
         }
         else {
@@ -127,7 +145,7 @@ window.onload = function() {
             else if (parentId <= 24) {
                 currDescription = document.getElementById("description2");
             }
-            else if (parentId <= 32) {
+            else if (parentId <= 36) {
                 currDescription = document.getElementById("description3");
             }
             else {
@@ -150,11 +168,35 @@ window.onload = function() {
             else if (parsedData[i].classType === "Natural Sciences Lab") {
                 addSpecifiedCourseSelector("naturalSciencesLabs", parsedNaturalSciencesLabs);
             }
+            else if (parsedData[i].classType === "Philosophy Culture") {
+                addSpecifiedCourseSelector("philosophyCulture", parsedPhilosophyCulture);
+            }
+            else if (parsedData[i].classType === "Writing Disciplines") {
+                addSpecifiedCourseSelector("writingDisciplines", parsedWritingDisciplines);
+            }
+            else if (parsedData[i].classType === "Social Behavioral") {
+                addSpecifiedCourseSelector("socialBehavioral", parsedSocialBehavioral);
+            }
+            else if (parsedData[i].classType === "Free Electives 3") {
+                addSpecifiedCourseSelector("freeElectives3", parsedFreeElectives3);
+            }
+            else if (parsedData[i].classType === "Free Electives 1") {
+                addSpecifiedCourseSelector("freeElectives1", parsedFreeElectives1);
+            }
+            else if (parsedData[i].classType === "COSC Electives") {
+                addSpecifiedCourseSelector("coscElectives", parsedCoscElectives);
+            }
         }
 
         addClickToDropdown("creativeArts", parsedCreativeArts);
         addClickToDropdown("naturalSciences", parsedNaturalSciences);
         addClickToDropdown("naturalSciencesLabs", parsedNaturalSciencesLabs);
+        addClickToDropdown("philosophyCulture", parsedPhilosophyCulture);
+        addClickToDropdown("writingDisciplines", parsedWritingDisciplines);
+        addClickToDropdown("socialBehavioral", parsedSocialBehavioral);
+        addClickToDropdown("freeElectives3", parsedFreeElectives3);
+        addClickToDropdown("freeElectives1", parsedFreeElectives1);
+        addClickToDropdown("coscElectives", parsedCoscElectives);
     }
 
     function addSpecifiedCourseSelector(className, data) {
@@ -213,7 +255,6 @@ window.onload = function() {
 
         for (i = 0; i < editable.length; i++) {  
             descChildren[editable[i]].setAttribute("contenteditable", true);
-            //descChildren[editable[i]].addEventListener("input", saveEditedChanges);
         }
     }
 
@@ -267,8 +308,12 @@ window.onload = function() {
 
     showTable(parsedData, 2, 11, 24);
     addCourseSelectors(11, 24);
-    // showTable(parsedData, 3, 23, 10);
-    // showTable(parsedData, 4, 34, 10);
+
+    showTable(parsedData, 3, 25, 36);
+    addCourseSelectors(25, 36);
+    
+    showTable(parsedData, 4, 37, 46);
+    addCourseSelectors(37, 46);
 
     addEditButton();
 }

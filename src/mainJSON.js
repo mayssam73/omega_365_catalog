@@ -165,8 +165,8 @@ const data = [
         num: "",
         name: "Natural Science Approved Course",
         creditHours: 3,
-        prereq: "None",
-        description: "None",
+        prereq: "None.",
+        description: "None.",
         repeatability: "No",
         classType: "Natural Sciences"
     },
@@ -174,8 +174,8 @@ const data = [
         num: "",
         name: "Natural Science Approved Course",
         creditHours: 3,
-        prereq: "None",
-        description: "None",
+        prereq: "None.",
+        description: "None.",
         repeatability: "No",
         classType: "Natural Sciences"
     },
@@ -183,8 +183,8 @@ const data = [
         num: "",
         name: "Natural Science Approved Laboratory",
         creditHours: 1,
-        prereq: "None",
-        description: "None",
+        prereq: "None.",
+        description: "None.",
         repeatability: "No",
         classType: "Natural Sciences Lab"
     },
@@ -192,8 +192,8 @@ const data = [
         num: "",
         name: "Natural Science Approved Laboratory",
         creditHours: 1,
-        prereq: "None",
-        description: "None",
+        prereq: "None.",
+        description: "None.",
         repeatability: "No",
         classType: "Natural Sciences Lab"
     },
@@ -204,15 +204,213 @@ const data = [
         prereq: "",
         description: "",
         repeatability: "",
-        classType: ""
+        classType: "None"
     },
     {
         num: "CORE",
         name: "Language, Philosophy, and Culture",
         creditHours: 3,
-        prereq: "None",
-        description: "None",
+        prereq: "None.",
+        description: "None.",
         repeatability: "No",
-        classType: "culture"
+        classType: "Philosophy Culture"
+    },
+    {
+        num: "COSC 3340",
+        name: "Introduction to Automata and Computability",
+        creditHours: 3,
+        prereq: "A grade of C- or better in MATH 3336, and COSC 2320 or COSC 2436.",
+        description: "Introduction to automata theory (finite-state automata, push-down automata, Turing machines); formal systems (regular and context-free languages and grammars); computability, Church-Turing thesis.",
+        repeatability: "No",
+        classType: "None"
+    },
+    {
+        num: "COSC 3380",
+        name: "Database Systems",
+        creditHours: 3,
+        prereq: "A grade of C- or better in COSC 2320 or COSC 2436.",
+        description: "Declared Computer Science majors and minors, and Computer Engineering majors. Database design with ER model, relational model and normalization up to 3NF/BCNF normal forms. Relational algebra and basic SQL queries combining filters, joins and aggregations. SQL transaction processing. Overview of DBMS internal subsystems including: storage, indexing, query optimizer, locking, recovery manager, security mechanisms. Database application development.",
+        repeatability: "No",
+        classType: "None"
+    },
+    {
+        num: "COSC 3320",
+        name: "Algorithms and Data Structures",
+        creditHours: 3,
+        prereq: "A grade of C- or better in MATH 3336, and COSC 2320 or COSC 2436.",
+        description: "Algorithm analysis and design, heuristics; advanced tree structures; advanced hashing techniques; sorting and searching; graphs, sets. NP-Completeness, Time and Space complexities.",
+        repeatability: "No",
+        classType: "None"
+    },
+    {
+        num: "CORE",
+        name: "Social and Behavioral Sciences",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Social Behavioral"
+    },
+    {
+        num: "MATH 3339",
+        name: "Statistics for the Sciences",
+        creditHours: 3,
+        prereq: "MATH 2414.",
+        description: "Graphical and descriptive methods in statistics, probability, random variables and distributions, sampling, estimation, hypothesis testing, regression, analysis of variance, exploratory and diagnostics, statistical computing.",
+        repeatability: "Yes",
+        classType: "None"
+    },
+    {
+        num: "",
+        name: "Natural Science Approved Course",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Natural Sciences"
+    },
+    {
+        num: "CORE",
+        name: "Writing in the Disciplines",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Writing Disciplines"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives"
+    },
+    {
+        num: "",
+        name: "Natural Science Approved Course",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Natural Sciences"
+    },
+    {
+        num: "COSC 4351",
+        name: "Fundamentals of Software Engineering OR",
+        creditHours: 3,
+        prereq: "COSC majors and minors: A grade of C- or better in COSC 3320 and MATH 3336; CpE majors: A grade of C- or better in COSC 2320 and MATH 3336.",
+        description: "Introduction to the concepts of software engineering. Identification of problems related to the development of large software systems. Software project planning, requirements analysis, design, implementation, quality assurance and maintenance.",
+        repeatability: "No",
+        classType: "None"
+    },
+    {
+        num: "",
+        name: "",
+        creditHours: "",
+        prereq: "",
+        description: "",
+        repeatability: "",
+        classType: "None"
+    },
+    {
+        num: "COSC 4353",
+        name: "Software Design",
+        creditHours: 3,
+        prereq: "A grade of C- or better in COSC 3320, and MATH 3336 or COSC 3336.",
+        description: "Object-oriented paradigm, classes, object relationship, software architecture, object modeling technique, design metrics, software development patterns, practices, and principles.",
+        repeatability: "No",
+        classType: "None"
+    },
+    {
+        num: "COSC XXXX",
+        name: "COSC Advanced Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "COSC Electives"
+    },
+    {
+        num: "COSC XXXX",
+        name: "COSC Advanced Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "COSC Electives"
+    },
+    {
+        num: "COSC XXXX",
+        name: "COSC Advanced Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "COSC Electives"
+    },
+    {
+        num: "COSC XXXX",
+        name: "COSC Advanced Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "COSC Electives"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives 3"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives 3"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives 3"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 3,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives 3"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 1,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives 1"
+    },
+    {
+        num: "",
+        name: "Minor / Free Elective",
+        creditHours: 1,
+        prereq: "None.",
+        description: "None.",
+        repeatability: "No",
+        classType: "Free Electives 1"
     },
 ]

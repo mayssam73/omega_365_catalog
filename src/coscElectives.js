@@ -1,4 +1,4 @@
-const freeElectives = [ 
+const coscElectives = [ 
     {
         num: "COSC 3337",
         name: "Data Science I",
@@ -37,46 +37,6 @@ const freeElectives = [
         creditHours: 3,
         prereq: "A grade of C- or better in COSC 4353.",
         description: "For Computer Science majors and minors only. Introduction to software development for ubiquitous devices such as PDAs and cell phones.",
-        repeatability: "No"
-    },
-    {
-        num: "COSC 4364",
-        name: "Numerical Methods",
-        creditHours: 3,
-        prereq: "A grade of C- or better in MATH 2318, MATH 3339, and COSC 2320 or COSC 2436.",
-        description: "Programming numerical solution of problems in linear algebra; system of linear equations, matrix inversion, and Eigenvalue problems, solution of equations, polynomial approximations, and initial value problems of ordinary differential equations.",
-        repeatability: "No"
-    },
-    {
-        num: "COSC 4370",
-        name: "Interactive Computer Graphics",
-        creditHours: 3,
-        prereq: "A grade of C- or better in MATH 2318, and COSC 2320 or COSC 2430.",
-        description: "Introduction to graphics hardware and software; interactive systems to display three-dimensional objects; display and input devices; and alternative algorithms, system configuration, and design trade-offs.",
-        repeatability: "No"
-    },
-    {
-        num: "COSC 4372",
-        name: "Fundamentals of Medical Imaging",
-        creditHours: 3,
-        prereq: "A grade of C- or better in COSC 2320 or COSC 2436.",
-        description: "Medical imaging modalities; principles, data collection, and image reconstruction. X-rays, CT, ultrasound, and MRI. Simulations of image generation.",
-        repeatability: "No"
-    },
-    {
-        num: "COSC 4377",
-        name: "Introduction To Computer Networks",
-        creditHours: 3,
-        prereq: "A grade of C- or better in COSC 2320 or COSC 2436.",
-        description: "Data communications; network protocols and architecture; local and wide-area networks; internetworking.",
-        repeatability: "No"
-    },
-    {
-        num: "COSC 4393",
-        name: "Digital Image Processing",
-        creditHours: 3,
-        prereq: "A grade of C- or better in COSC 2320 or COSC 2436.",
-        description: "Essential concepts of digital image processing, image acquisition and processing, practical applications, and elementary image analysis algorithms.",
         repeatability: "No"
     },
 ]

@@ -1,4 +1,4 @@
-const freeElectives = [ 
+const philosophyCulture = [ 
     {
         num: "ARTS 1303",
         name: "Art History I (Prehistoric to the 14th Century)",
