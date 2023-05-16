@@ -286,19 +286,21 @@ window.onload = function() {
         var id = this.id.slice(1);
         var shownDescription = document.getElementsByClassName("show")[0];
         
-        let submitButton = `<br><br><button class="submit">Submit</button>`;
-        var submitBtnExists = document.getElementsByClassName("submit")[0];
-        if (submitBtnExists === undefined) {       
-            shownDescription.innerHTML += submitButton;
-        }
-
-        var editable = [0, 2, 5, 8, 11];
-        addClickToSubmit(id, shownDescription);
-
-        var descChildren = shownDescription.children;
-
-        for (i = 0; i < editable.length; i++) {  
-            descChildren[editable[i]].setAttribute("contenteditable", true);
+        if (shownDescription !== undefined) {
+            let submitButton = `<br><br><button class="submit">Submit</button>`;
+            var submitBtnExists = document.getElementsByClassName("submit")[0];
+            if (submitBtnExists === undefined) {       
+                shownDescription.innerHTML += submitButton;
+            }
+    
+            var editable = [0, 2, 5, 8, 11];
+            addClickToSubmit(id, shownDescription);
+    
+            var descChildren = shownDescription.children;
+    
+            for (i = 0; i < editable.length; i++) {  
+                descChildren[editable[i]].setAttribute("contenteditable", true);
+            }
         }
     }
 
