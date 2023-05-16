@@ -292,10 +292,10 @@ window.onload = function() {
             if (submitBtnExists === undefined) {       
                 shownDescription.innerHTML += submitButton;
             }
-    
-            var editable = [0, 2, 5, 8, 11];
+
             addClickToSubmit(id, shownDescription);
     
+            var editable = [0, 2, 5, 8, 11];
             var descChildren = shownDescription.children;
     
             for (i = 0; i < editable.length; i++) {  
@@ -305,16 +305,14 @@ window.onload = function() {
     }
 
     function addClickToSubmit(id, description) {
-        let allSubmitBtns = document.getElementsByClassName("submit");
-        for (var i = 0; i < allSubmitBtns.length; i++) {
-            allSubmitBtns[i].addEventListener("click", function () {
-                saveEditedChanges(id, description)
-            });
-        }
+        let submitBtn = document.getElementsByClassName("submit")[0];
+        submitBtn.addEventListener("click", function () {
+            saveEditedChanges(id, description)
+        });
     }
 
     function saveEditedChanges(id, description) {
-        var splitNumName = description.children[0].innerText.trim().split("-");
+        var splitNumName = description.children[0].innerHTML.trim().split("-");
         
         parsedData[id].num = splitNumName[0];
         parsedData[id].name = splitNumName[1];
@@ -328,25 +326,23 @@ window.onload = function() {
             displayedClassInfo[0].innerHTML = splitNumName[0];
         }
         else {
-            var splitTextDropdown0 = displayedClassInfo[0].innerHTML.trim().split("<")
-            if (splitTextDropdown0[0] !== "") {
-                displayedClassInfo[0].removeChild(displayedClassInfo[0].firstChild);
-            }
-            
-            displayedClassInfo[0].insertAdjacentHTML("afterbegin", splitNumName[0]);
+            splitTextDropdown(displayedClassInfo, splitNumName[0], 0);
         }
 
-        var splitTextDropdown1 = displayedClassInfo[1].innerHTML.trim().split("<");
-        if (splitTextDropdown1[0] != "") {  
-            displayedClassInfo[1].removeChild(displayedClassInfo[1].firstChild);
-        }
-
-        displayedClassInfo[1].insertAdjacentHTML("afterbegin", splitNumName[1]);
+        splitTextDropdown(displayedClassInfo, splitNumName[1], 1);
         
         displayedClassInfo[2].innerHTML = description.children[2].innerHTML;
 
         localStorage.setItem("data", JSON.stringify(parsedData));
-        parsedData = JSON.parse(localStorage.getItem("data"));
+    }
+
+    function splitTextDropdown(displayedClassInfo, splitNumName, index) {
+        var split = displayedClassInfo[index].innerHTML.trim().split("<");
+        if (split[0] !== "") {
+            displayedClassInfo[index].removeChild(displayedClassInfo[index].firstChild);
+        }
+        
+        displayedClassInfo[index].insertAdjacentHTML("afterbegin", splitNumName);
     }
 
     showTable(parsedData, 1, 1, 10);
