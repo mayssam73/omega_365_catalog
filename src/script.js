@@ -372,12 +372,12 @@ window.onload = function() {
         
         if (semester == 1 && parsedData[id + 1].num === "" && parsedData[id + 1].name === "" && parsedData[id + 1].creditHours === "") {
             currCell[0].parentElement.remove();
-            resetIdOnDelete();
+            resetId();
         }
         else if (semester == 2 && parsedData[id - 1].num === "" && parsedData[id - 1].name === "" && parsedData[id - 1].creditHours === "") {
             currCell[0].parentElement.remove();
             console.log(currCell[0])
-            resetIdOnDelete();
+            resetId();
         }
         else {
             if (parsedData[id].classType === "None") {
@@ -391,7 +391,7 @@ window.onload = function() {
         }
     }
 
-    function resetIdOnDelete() {
+    function resetId() {
         var allTableCells = document.getElementsByClassName("cell");
         var x = 0;
 
@@ -399,7 +399,7 @@ window.onload = function() {
             allTableCells[i].id = "i" + x;
             allTableCells[i + 1].id = "i" + x;
             allTableCells[i + 2].id = "i" + x;
-            
+
             x++;
         }
     }
