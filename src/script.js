@@ -1,5 +1,20 @@
 window.onload = function() {
     let parsedData = JSON.parse(localStorage.getItem("data"));
+
+    if (parsedData === null) {
+        localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("creativeArts", JSON.stringify(creativeArts));
+        localStorage.setItem("naturalSciences", JSON.stringify(naturalSciences));
+        localStorage.setItem("naturalSciencesLabs", JSON.stringify(naturalSciencesLabs));
+        localStorage.setItem("philosophyCulture", JSON.stringify(philosophyCulture));
+        localStorage.setItem("writingDisciplines", JSON.stringify(writingDisciplines));
+        localStorage.setItem("socialBehavioral", JSON.stringify(socialBehavioral));
+        localStorage.setItem("freeElectives3", JSON.stringify(freeElectives3));
+        localStorage.setItem("freeElectives1", JSON.stringify(freeElectives1));
+        localStorage.setItem("coscElectives", JSON.stringify(coscElectives));
+    }
+
+    parsedData = JSON.parse(localStorage.getItem("data"));
     let parsedCreativeArts = JSON.parse(localStorage.getItem("creativeArts"));
     let parsedNaturalSciences = JSON.parse(localStorage.getItem("naturalSciences"));
     let parsedNaturalSciencesLabs = JSON.parse(localStorage.getItem("naturalSciencesLabs"));
