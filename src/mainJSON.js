@@ -272,7 +272,7 @@ const data = [
         repeatability: "No",
         classType: "None",
         year: 3,
-        semester: 2
+        semester: 1
     },
     {
         num: "COSC 3380",

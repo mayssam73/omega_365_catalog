@@ -46,7 +46,7 @@ window.onload = function() {
                 <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester}" id="i${i-1}">${parsedData[i - 1].name}</td>
                 <td id="i${i-1}">${parsedData[i - 1].creditHours}</td>
                 <td class="${clickable2}" id="i${i}">${parsedData[i].num}</td>
-                <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester}" id="i${i}">${parsedData[i].name}</td>
+                <td class="${parsedData[i].year} ${parsedData[i].semester}" id="i${i}">${parsedData[i].name}</td>
                 <td id="i${i}">${parsedData[i].creditHours}</td>
                 <td></td>
             </tr>`;
@@ -333,10 +333,8 @@ window.onload = function() {
         else {
             splitTextDropdown(displayedClassInfo, splitNumName[0], 0);
         }
-
         splitTextDropdown(displayedClassInfo, splitNumName[1], 1);
-        
-        displayedClassInfo[2].innerHTML = description.children[2].innerHTML;
+        splitTextDropdown(displayedClassInfo, parsedData[id].creditHours, 2);
 
         localStorage.setItem("data", JSON.stringify(parsedData));
     }
@@ -348,6 +346,46 @@ window.onload = function() {
         }
         
         displayedClassInfo[index].insertAdjacentHTML("afterbegin", splitNumName);
+    }
+
+    function addDeleteButton() {
+        for (i = 0; i < parsedData.length; i++) {
+            var tableData = document.querySelectorAll("#i" + i)[2];
+            let deleteButton = `<button class="delete" id="d${i}">🗑️</button>`;
+            tableData.innerHTML += deleteButton;
+        }
+
+        addClickToDelete();
+    }
+
+    function addClickToDelete() {
+        let allDeleteBtns = document.getElementsByClassName("delete");
+        for (var i = 0; i < allDeleteBtns.length; i++) {
+            allDeleteBtns[i].addEventListener("click", deleteRow);
+        }
+    }
+
+    function deleteRow() {
+        var id = parseInt(this.id.slice(1));
+        var currCell = document.querySelectorAll("#i" + id);
+        var semester = currCell[1].className[2];
+        
+        if (semester == 1 && parsedData[id + 1].num === "" && parsedData[id + 1].name === "" && parsedData[id + 1].creditHours === "") {
+            currCell[0].parentElement.remove();
+        }
+        else if (semester == 2 && parsedData[id - 1].num === "" && parsedData[id - 1].name === "" && parsedData[id - 1].creditHours === "") {
+            currCell[0].parentElement.remove();
+        }
+        else {
+            if (parsedData[id].classType === "None") {
+                currCell[0].innerHTML = "";
+            }
+            else {
+                splitTextDropdown(currCell, "", 0);
+                splitTextDropdown(currCell, "", 1);
+                splitTextDropdown(currCell, "", 2);
+            }
+        }
     }
 
     showTable(parsedData, 1, 1, 10);
@@ -363,4 +401,5 @@ window.onload = function() {
     addCourseSelectors(37, 46);
 
     addEditButton();
+    addDeleteButton();
 }
