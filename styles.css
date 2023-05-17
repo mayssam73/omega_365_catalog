@@ -32,6 +32,7 @@ p {
 .year {
     writing-mode: vertical-lr;
     transform: rotate(180deg);
+    text-align: center;
     font-size: 2rem;
     background-color: black;
     color: white;

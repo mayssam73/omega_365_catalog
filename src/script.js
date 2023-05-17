@@ -32,8 +32,8 @@ window.onload = function() {
         let table =
             `<tr>
                 <th class="year" rowspan="9">Year ${tableNum}</th>
-                <th class="header" colspan="3">Semester 1 Fall</th>
-                <th class="header" colspan="3">Semester 2 Spring</th>
+                <th class="header semester" colspan="3">Semester 1 Fall</th>
+                <th class="header semester" colspan="3">Semester 2 Spring</th>
                 <th class="header">Total</th>
             </tr>`;
 
@@ -43,10 +43,10 @@ window.onload = function() {
 
             table += `<tr>
                 <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].num}</td>
-                <td id="i${i-1}">${parsedData[i - 1].name}</td>
+                <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester}" id="i${i-1}">${parsedData[i - 1].name}</td>
                 <td id="i${i-1}">${parsedData[i - 1].creditHours}</td>
                 <td class="${clickable2}" id="i${i}">${parsedData[i].num}</td>
-                <td id="i${i}">${parsedData[i].name}</td>
+                <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester}" id="i${i}">${parsedData[i].name}</td>
                 <td id="i${i}">${parsedData[i].creditHours}</td>
                 <td></td>
             </tr>`;
