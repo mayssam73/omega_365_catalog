@@ -42,12 +42,12 @@ window.onload = function() {
             var clickable2 = parsedData[i].classType === "None" ? "clickable" : "notClickable";
 
             table += `<tr>
-                <td class="${clickable1}" id="i${i-1}">${parsedData[i - 1].num}</td>
-                <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester}" id="i${i-1}">${parsedData[i - 1].name}</td>
-                <td id="i${i-1}">${parsedData[i - 1].creditHours}</td>
-                <td class="${clickable2}" id="i${i}">${parsedData[i].num}</td>
-                <td class="${parsedData[i].year} ${parsedData[i].semester}" id="i${i}">${parsedData[i].name}</td>
-                <td id="i${i}">${parsedData[i].creditHours}</td>
+                <td class="${clickable1} cell" id="i${i-1}">${parsedData[i - 1].num}</td>
+                <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester} cell" id="i${i-1}">${parsedData[i - 1].name}</td>
+                <td class="cell" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
+                <td class="${clickable2} cell" id="i${i}">${parsedData[i].num}</td>
+                <td class="${parsedData[i].year} ${parsedData[i].semester} cell" id="i${i}">${parsedData[i].name}</td>
+                <td class="cell" id="i${i}">${parsedData[i].creditHours}</td>
                 <td></td>
             </tr>`;
             
@@ -372,9 +372,12 @@ window.onload = function() {
         
         if (semester == 1 && parsedData[id + 1].num === "" && parsedData[id + 1].name === "" && parsedData[id + 1].creditHours === "") {
             currCell[0].parentElement.remove();
+            resetIdOnDelete();
         }
         else if (semester == 2 && parsedData[id - 1].num === "" && parsedData[id - 1].name === "" && parsedData[id - 1].creditHours === "") {
             currCell[0].parentElement.remove();
+            console.log(currCell[0])
+            resetIdOnDelete();
         }
         else {
             if (parsedData[id].classType === "None") {
@@ -385,6 +388,19 @@ window.onload = function() {
                 splitTextDropdown(currCell, "", 1);
                 splitTextDropdown(currCell, "", 2);
             }
+        }
+    }
+
+    function resetIdOnDelete() {
+        var allTableCells = document.getElementsByClassName("cell");
+        var x = 0;
+
+        for (i = 0; i < allTableCells.length; i+=3) {
+            allTableCells[i].id = "i" + x;
+            allTableCells[i + 1].id = "i" + x;
+            allTableCells[i + 2].id = "i" + x;
+            
+            x++;
         }
     }
 
