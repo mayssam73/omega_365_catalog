@@ -92,16 +92,16 @@ window.onload = function() {
 
         var currDescription;
 
-        if (id <= 9) {
+        if (parsedData[id].year === 1) {
             currDescription = document.getElementById("description1");
         }
-        else if (id <= 23) {
+        else if (parsedData[id].year === 2) {
             currDescription = document.getElementById("description2");
         }
-        else if (id <= 35) {
+        else if (parsedData[id].year === 3) {
             currDescription = document.getElementById("description3");
         }
-        else {
+        else if (parsedData[id].year === 4){
             currDescription = document.getElementById("description4");
         }
 
@@ -135,16 +135,16 @@ window.onload = function() {
             var parent = object.parentNode.parentNode;
             var parentId = parent.id.slice(1);
 
-            if (parentId <= 9) {
+            if (parsedData[parentId].year === 1) {
                 currDescription = document.getElementById("description1");
             }
-            else if (parentId <= 23) {
+            else if (parsedData[parentId].year === 2) {
                 currDescription = document.getElementById("description2");
             }
-            else if (parentId <= 35) {
+            else if (parsedData[parentId].year === 3) {
                 currDescription = document.getElementById("description3");
             }
-            else {
+            else if (parsedData[parentId].year === 4){
                 currDescription = document.getElementById("description4");
             }
 
