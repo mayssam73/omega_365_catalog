@@ -37,6 +37,34 @@ button {
     text-decoration: none;
 }
 
+.welcome-container {
+    text-align: center;
+    margin-top: 10vh;
+    border: 1px solid lightgray;
+}
+
+.welcome {
+    width: fit-content;
+    padding: 5vw;
+    display: inline-block;
+}
+
+.new {
+    margin: 2vh;
+}
+
+.showWelcome {
+    display: block;
+}
+
+.hideWelcome {
+    display: none;
+}
+
+.user, .admin {
+    margin-top: 2vh;
+}
+
 .btn-secondary {
     background-color: lightgray;
     border: lightgray;

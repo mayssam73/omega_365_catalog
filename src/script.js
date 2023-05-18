@@ -541,14 +541,46 @@ window.onload = function() {
         modal.hide();
     }
 
-    showTable(parsedData, 1, 1, 0, 1);
-    showTable(parsedData, 2, 2, 2, 3);
-    showTable(parsedData, 3, 3, 4, 5);
-    showTable(parsedData, 4, 4, 6, 7);
+    function addClickToUser() {
+        var userButton = document.getElementsByClassName("user")[0];
+        userButton.addEventListener("click", displayUserTable);
+    }
 
-    addCourseSelectors();
+    function addClickToAdmin() {
+        var adminButton = document.getElementsByClassName("admin")[0];
+        adminButton.addEventListener("click", displayAdminTable);
+    }
 
-    addEditButtons();
-    addDeleteButtons();
-    addAddButtons();
+    function displayUserTable() {
+        var welcome = document.getElementsByClassName("showWelcome")[0];
+        if (welcome !== undefined) {
+            welcome.classList.replace("showWelcome", "hideWelcome");
+        }
+
+        showTable(parsedData, 1, 1, 0, 1);
+        showTable(parsedData, 2, 2, 2, 3);
+        showTable(parsedData, 3, 3, 4, 5);
+        showTable(parsedData, 4, 4, 6, 7);
+    }
+
+    function displayAdminTable() {
+        var welcome = document.getElementsByClassName("showWelcome")[0];
+        if (welcome !== undefined) {
+            welcome.classList.replace("showWelcome", "hideWelcome");
+        }
+
+        showTable(parsedData, 1, 1, 0, 1);
+        showTable(parsedData, 2, 2, 2, 3);
+        showTable(parsedData, 3, 3, 4, 5);
+        showTable(parsedData, 4, 4, 6, 7);
+
+        addCourseSelectors();
+    
+        addEditButtons();
+        addDeleteButtons();
+        addAddButtons();
+    };
+
+    addClickToUser();
+    addClickToAdmin();
 }
