@@ -25,7 +25,7 @@ window.onload = function() {
     let parsedFreeElectives1 = JSON.parse(localStorage.getItem("freeElectives1"));
     let parsedCoscElectives = JSON.parse(localStorage.getItem("coscElectives"));
 
-    function showTable(parsedData, tableNum, courseStart, courseNum) {
+    function showTable(parsedData, tableNum, year) {
         var totalHoursFall = 0;
         var totalHoursSpring = 0;
         
@@ -37,23 +37,25 @@ window.onload = function() {
                 <th class="header">Total</th>
             </tr>`;
 
-        for (i = courseStart; i < courseNum; i+=2) {
-            var clickable1 = parsedData[i - 1].classType === "None" ? "clickable" : "notClickable";
-            var clickable2 = parsedData[i].classType === "None" ? "clickable" : "notClickable";
-
-            table += `<tr>
-                <td class="${clickable1} cell" id="i${i-1}">${parsedData[i - 1].num}</td>
-                <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester} cell" id="i${i-1}">${parsedData[i - 1].name}</td>
-                <td class="cell" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
-                <td class="${clickable2} cell" id="i${i}">${parsedData[i].num}</td>
-                <td class="${parsedData[i].year} ${parsedData[i].semester} cell" id="i${i}">${parsedData[i].name}</td>
-                <td class="cell" id="i${i}">${parsedData[i].creditHours}</td>
-                <td></td>
-            </tr>`;
-            
-            if (parsedData[i - 1].creditHours !== "" && parsedData[i].creditHours != "") {
-                totalHoursFall += parsedData[i - 1].creditHours;
-                totalHoursSpring += parsedData[i].creditHours;
+        for (i = 1; i < parsedData.length; i+=2) {
+            if (parsedData[i - 1].year === year) {
+                var clickable1 = parsedData[i - 1].classType === "None" ? "clickable" : "notClickable";
+                var clickable2 = parsedData[i].classType === "None" ? "clickable" : "notClickable";
+    
+                table += `<tr>
+                    <td class="${clickable1} cell" id="i${i-1}">${parsedData[i - 1].num}</td>
+                    <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester} cell" id="i${i-1}">${parsedData[i - 1].name}</td>
+                    <td class="cell" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
+                    <td class="${clickable2} cell" id="i${i}">${parsedData[i].num}</td>
+                    <td class="${parsedData[i].year} ${parsedData[i].semester} cell" id="i${i}">${parsedData[i].name}</td>
+                    <td class="cell" id="i${i}">${parsedData[i].creditHours}</td>
+                    <td></td>
+                </tr>`;
+                
+                if (parsedData[i - 1].creditHours !== "" && parsedData[i].creditHours != "") {
+                    totalHoursFall += parsedData[i - 1].creditHours;
+                    totalHoursSpring += parsedData[i].creditHours;
+                }
             }
         }
         
@@ -158,34 +160,34 @@ window.onload = function() {
         }
     }
 
-    function addCourseSelectors(courseStart, courseNum) {
-        for (i = courseStart - 1; i < courseNum; i++) {
+    function addCourseSelectors() {
+        for (i = 0; i < parsedData.length; i++) {
             if (parsedData[i].classType === "Creative Arts") {  
-                addSpecifiedCourseSelector("creativeArts", parsedCreativeArts);
+                addSpecifiedCourseSelector("creativeArts", parsedCreativeArts, i);
             }
             else if (parsedData[i].classType === "Natural Sciences") {
-                addSpecifiedCourseSelector("naturalSciences", parsedNaturalSciences);
+                addSpecifiedCourseSelector("naturalSciences", parsedNaturalSciences, i);
             }
             else if (parsedData[i].classType === "Natural Sciences Lab") {
-                addSpecifiedCourseSelector("naturalSciencesLabs", parsedNaturalSciencesLabs);
+                addSpecifiedCourseSelector("naturalSciencesLabs", parsedNaturalSciencesLabs, i);
             }
             else if (parsedData[i].classType === "Philosophy Culture") {
-                addSpecifiedCourseSelector("philosophyCulture", parsedPhilosophyCulture);
+                addSpecifiedCourseSelector("philosophyCulture", parsedPhilosophyCulture, i);
             }
             else if (parsedData[i].classType === "Writing Disciplines") {
-                addSpecifiedCourseSelector("writingDisciplines", parsedWritingDisciplines);
+                addSpecifiedCourseSelector("writingDisciplines", parsedWritingDisciplines, i);
             }
             else if (parsedData[i].classType === "Social Behavioral") {
-                addSpecifiedCourseSelector("socialBehavioral", parsedSocialBehavioral);
+                addSpecifiedCourseSelector("socialBehavioral", parsedSocialBehavioral, i);
             }
             else if (parsedData[i].classType === "Free Electives 3") {
-                addSpecifiedCourseSelector("freeElectives3", parsedFreeElectives3);
+                addSpecifiedCourseSelector("freeElectives3", parsedFreeElectives3, i);
             }
             else if (parsedData[i].classType === "Free Electives 1") {
-                addSpecifiedCourseSelector("freeElectives1", parsedFreeElectives1);
+                addSpecifiedCourseSelector("freeElectives1", parsedFreeElectives1, i);
             }
             else if (parsedData[i].classType === "COSC Electives") {
-                addSpecifiedCourseSelector("coscElectives", parsedCoscElectives);
+                addSpecifiedCourseSelector("coscElectives", parsedCoscElectives, i);
             }
         }
 
@@ -200,7 +202,7 @@ window.onload = function() {
         addClickToDropdown("coscElectives", parsedCoscElectives);
     }
 
-    function addSpecifiedCourseSelector(className, data) {
+    function addSpecifiedCourseSelector(className, data, id) {
         dropdown = 
         `<select class=${className}>
             <option value="default" selected>Select Course</option>`;
@@ -211,8 +213,8 @@ window.onload = function() {
         }
 
         dropdown += `</select>`
-
-        document.querySelectorAll('#i' + i)[0].innerHTML += dropdown;
+        
+        document.querySelectorAll('#i' + id)[0].innerHTML += dropdown;
     }
 
     function addClickToDropdown(className, data) {
@@ -372,12 +374,14 @@ window.onload = function() {
         
         if (semester == 1 && parsedData[id + 1].num === "" && parsedData[id + 1].name === "" && parsedData[id + 1].creditHours === "") {
             currCell[0].parentElement.remove();
-            resetId();
+            parsedData.splice(id, 2);
+            resetIds();
         }
         else if (semester == 2 && parsedData[id - 1].num === "" && parsedData[id - 1].name === "" && parsedData[id - 1].creditHours === "") {
             currCell[0].parentElement.remove();
-            console.log(currCell[0])
-            resetId();
+            parsedData.splice(id - 1, 2);
+            console.log(parsedData)
+            resetIds();
         }
         else {
             if (parsedData[id].classType === "None") {
@@ -385,14 +389,24 @@ window.onload = function() {
             }
             else {
                 splitTextDropdown(currCell, "", 0);
-                splitTextDropdown(currCell, "", 1);
-                splitTextDropdown(currCell, "", 2);
             }
+            splitTextDropdown(currCell, "", 1);
+            splitTextDropdown(currCell, "", 2);
+            
+            parsedData[id].num = "";
+            parsedData[id].name = "";
+            parsedData[id].creditHours = "";
+            parsedData[id].prereq = "";
+            parsedData[id].description = "";
         }
+
+        localStorage.setItem("data", JSON.stringify(parsedData));
     }
 
-    function resetId() {
+    function resetIds() {
         var allTableCells = document.getElementsByClassName("cell");
+        var allEditBtns = document.getElementsByClassName("edit");
+        var allDeleteBtns = document.getElementsByClassName("delete");
         var x = 0;
 
         for (i = 0; i < allTableCells.length; i+=3) {
@@ -402,19 +416,19 @@ window.onload = function() {
 
             x++;
         }
+
+        for (i = 0; i < allEditBtns.length; i++) {
+            allEditBtns[i].id = "e" + i;
+            allDeleteBtns[i].id = "d" + i;
+        }
     }
 
-    showTable(parsedData, 1, 1, 10);
-    addCourseSelectors(1, 10);
+    showTable(parsedData, 1, 1);
+    showTable(parsedData, 2, 2);
+    showTable(parsedData, 3, 3);
+    showTable(parsedData, 4, 4);
 
-    showTable(parsedData, 2, 11, 24);
-    addCourseSelectors(11, 24);
-
-    showTable(parsedData, 3, 25, 36);
-    addCourseSelectors(25, 36);
-    
-    showTable(parsedData, 4, 37, 46);
-    addCourseSelectors(37, 46);
+    addCourseSelectors();
 
     addEditButton();
     addDeleteButton();
