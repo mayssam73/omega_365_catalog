@@ -502,7 +502,7 @@ window.onload = function() {
 
                     currSemester.parentNode.parentNode.insertBefore(newRow, currSemester.previousSibling.parentNode);
 
-                    var year = document.getElementsByClassName("year")[0];
+                    var year = document.getElementsByClassName("year");
                     for (i = 0; i < year.length; i++) {
                         year[i].setAttribute("rowspan", parseInt(year[i].getAttribute("rowspan")) + 1);
                     }
