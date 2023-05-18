@@ -37,8 +37,14 @@ button {
     text-decoration: none;
 }
 
-select {
-    margin-left: 3vw;
+.btn-secondary {
+    background-color: lightgray;
+    border: lightgray;
+    color: black;
+}
+
+.btn-primary {
+    background-color: black;
 }
 
 .year {
@@ -80,6 +86,6 @@ tr.hours {
     cursor: pointer;
 }
 
-.edit, .delete {
+.edit, .delete, .add {
     margin-left: 0.5vw;
 }

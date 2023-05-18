@@ -12,6 +12,7 @@ window.onload = function() {
         localStorage.setItem("freeElectives3", JSON.stringify(freeElectives3));
         localStorage.setItem("freeElectives1", JSON.stringify(freeElectives1));
         localStorage.setItem("coscElectives", JSON.stringify(coscElectives));
+        localStorage.setItem("addedClasses", JSON.stringify(addedClasses));
     }
 
     parsedData = JSON.parse(localStorage.getItem("data"));
@@ -24,8 +25,9 @@ window.onload = function() {
     let parsedFreeElectives3 = JSON.parse(localStorage.getItem("freeElectives3"));
     let parsedFreeElectives1 = JSON.parse(localStorage.getItem("freeElectives1"));
     let parsedCoscElectives = JSON.parse(localStorage.getItem("coscElectives"));
+    let parsedAddedClasses = JSON.parse(localStorage.getItem("addedClasses"));
 
-    function showTable(parsedData, tableNum, year) {
+    function showTable(parsedData, tableNum, year, firstSemId, secondSemId) {
         var totalHoursFall = 0;
         var totalHoursSpring = 0;
         
@@ -45,7 +47,7 @@ window.onload = function() {
                 table += `<tr>
                     <td class="${clickable1} cell" id="i${i-1}">${parsedData[i - 1].num}</td>
                     <td class="${parsedData[i - 1].year} ${parsedData[i - 1].semester} cell" id="i${i-1}">${parsedData[i - 1].name}</td>
-                    <td class="cell" id="i${i-1}">${parsedData[i - 1].creditHours}</td>
+                    <td class="cell" id="i${i - 1}">${parsedData[i - 1].creditHours}</td>
                     <td class="${clickable2} cell" id="i${i}">${parsedData[i].num}</td>
                     <td class="${parsedData[i].year} ${parsedData[i].semester} cell" id="i${i}">${parsedData[i].name}</td>
                     <td class="cell" id="i${i}">${parsedData[i].creditHours}</td>
@@ -61,9 +63,9 @@ window.onload = function() {
         
         table += 
             `<tr class="hours">
-                <td colspan="2">Semester Hours</td>
+                <td id="s${firstSemId}" colspan="2">Semester Hours</td>
                 <td>${totalHoursFall}</td>
-                <td colspan="2">Semester Hours</td>
+                <td id="s${secondSemId}" colspan="2">Semester Hours</td>
                 <td>${totalHoursSpring}</td>
                 <td style="text-align: center">${totalHoursFall + totalHoursSpring}</td>
             </tr>`
@@ -92,20 +94,7 @@ window.onload = function() {
             <p>${parsedData[id].repeatability}</p>
             `
 
-        var currDescription;
-
-        if (parsedData[id].year === 1) {
-            currDescription = document.getElementById("description1");
-        }
-        else if (parsedData[id].year === 2) {
-            currDescription = document.getElementById("description2");
-        }
-        else if (parsedData[id].year === 3) {
-            currDescription = document.getElementById("description3");
-        }
-        else if (parsedData[id].year === 4){
-            currDescription = document.getElementById("description4");
-        }
+        var currDescription = document.getElementById("description" + parsedData[id].year);
 
         var prevDescription = document.getElementsByClassName("show");
         if (prevDescription[0] !== undefined) {
@@ -133,22 +122,9 @@ window.onload = function() {
                 <p>${myData[value].repeatability}</p>
                 `
 
-            var currDescription;
             var parent = object.parentNode.parentNode;
             var parentId = parent.id.slice(1);
-
-            if (parsedData[parentId].year === 1) {
-                currDescription = document.getElementById("description1");
-            }
-            else if (parsedData[parentId].year === 2) {
-                currDescription = document.getElementById("description2");
-            }
-            else if (parsedData[parentId].year === 3) {
-                currDescription = document.getElementById("description3");
-            }
-            else if (parsedData[parentId].year === 4){
-                currDescription = document.getElementById("description4");
-            }
+            var currDescription = document.getElementById("description" + parsedData[parentId].year);
 
             var prevDescription = document.getElementsByClassName("show");
             if (prevDescription[0] !== undefined) {
@@ -226,7 +202,7 @@ window.onload = function() {
         }
     }
 
-    function addEditButton() {
+    function addEditButtons() {
         for (i = 0; i < parsedData.length; i++) {
             var tableData = document.querySelectorAll("#i" + i)[1];
             let editButton = `<button class="edit" id="e${i}">Edit</button>`;
@@ -350,25 +326,29 @@ window.onload = function() {
         displayedClassInfo[index].insertAdjacentHTML("afterbegin", splitNumName);
     }
 
-    function addDeleteButton() {
+    function addDeleteButtons() {
         for (i = 0; i < parsedData.length; i++) {
             var tableData = document.querySelectorAll("#i" + i)[2];
             let deleteButton = `<button class="delete" id="d${i}">🗑️</button>`;
             tableData.innerHTML += deleteButton;
+            
+            addClickToDelete(i);
         }
-
-        addClickToDelete();
     }
 
     function addClickToDelete() {
         let allDeleteBtns = document.getElementsByClassName("delete");
-        for (var i = 0; i < allDeleteBtns.length; i++) {
-            allDeleteBtns[i].addEventListener("click", deleteRow);
+        for (let i = 0; i < allDeleteBtns.length; i++) {
+            allDeleteBtns[i].addEventListener("click", e => {
+                if (e.target.matches(".delete")) {
+                    deleteRow(i);
+                }
+            });
         }
     }
 
-    function deleteRow() {
-        var id = parseInt(this.id.slice(1));
+    function deleteRow(id) {
+        console.log(id);
         var currCell = document.querySelectorAll("#i" + id);
         var semester = currCell[1].className[2];
         
@@ -423,13 +403,152 @@ window.onload = function() {
         }
     }
 
-    showTable(parsedData, 1, 1);
-    showTable(parsedData, 2, 2);
-    showTable(parsedData, 3, 3);
-    showTable(parsedData, 4, 4);
+    function addAddButtons() {
+        var semesterHeaders = document.getElementsByClassName("semester");
+        for (i = 0; i < semesterHeaders.length; i++) {
+            var addButton = `<button class="add" id="a${i}">Add</button>`
+            semesterHeaders[i].innerHTML += addButton;
+        }
+
+        addClickToAdd();
+    }
+
+    function addClickToAdd() {
+        let allAddBtns = document.getElementsByClassName("add");
+        for (var i = 0; i < allAddBtns.length; i++) {
+            allAddBtns[i].addEventListener("click", openAddModal);
+        }
+    }
+
+    var modalWrap = null;
+
+    function openAddModal() {
+        var id = this.id.slice(1);
+
+        if (modalWrap !== null) {
+            modalWrap.remove();
+        }
+
+        modalWrap = document.createElement("div");
+        let modalHTML = `
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select class="addSelect">
+                        <option value="default" selected>Select Course</option>`;
+
+        for (i = 0; i < parsedAddedClasses.length; i++) {
+            var myOption = `<option value=av${i}>${parsedAddedClasses[i].num}</option>`
+            modalHTML += myOption;
+        }
+
+        modalHTML += `
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary saveAdd">Save changes</button>
+                </div>
+                </div>
+            </div>
+            </div>`
+        
+        modalWrap.innerHTML = modalHTML;
+        document.body.append(modalWrap);
+
+        var modal = new bootstrap.Modal(document.getElementById("addModal"));
+        modal.show();
+
+        addClickToSaveAdd(modal, id);
+    }
+
+    function addClickToSaveAdd(modal, id) {
+        let saveBtn = document.getElementsByClassName("saveAdd")[0];
+        saveBtn.addEventListener("click", function() {
+            onSaveAdd(modal, id)
+        });
+    }
+
+    function onSaveAdd(modal, id) {
+        var select = document.getElementsByClassName("addSelect")[0];
+        var selectedCourseId = select.options[select.selectedIndex].value.slice(2);
+        var currSemester = document.getElementById("s" + id);
+        var prevCourse = currSemester.parentElement.previousElementSibling.children;
+        var newRow;
+
+        if (id % 2 == 0) {
+            var courseName = prevCourse[1].innerHTML.trim().split("<");
+            var creditHours = prevCourse[2].innerHTML.trim().split("<");
+            if (prevCourse[0].innerHTML === "" || courseName[0] === "" || creditHours[0] === "") {
+                prevCourse[0].innerHTML = parsedAddedClasses[selectedCourseId].num;
+                splitTextDropdown(prevCourse, parsedAddedClasses[selectedCourseId].name, 1);
+                splitTextDropdown(prevCourse, parsedAddedClasses[selectedCourseId].creditHours, 2);
+            }
+            else {
+                newRow = document.createElement("tr");
+                newRow.innerHTML += `
+                    <td class="clickable cell">${parsedAddedClasses[selectedCourseId].num}</td>
+                    <td class="${0} ${0} cell">${parsedAddedClasses[selectedCourseId].name}<button class="edit" id="e${i}">Edit</button></td>
+                    <td class="cell">${parsedAddedClasses[selectedCourseId].creditHours}<button class="delete" id="d${i}">🗑️</button></td>
+                    <td class="clickable cell"></td>
+                    <td class="${0} ${0} cell"><button class="edit" id="e${i}">Edit</button></td>
+                    <td class="cell"><button class="delete" id="d${i}">🗑️</button></td>
+                    <td></td>`
+
+                    currSemester.parentNode.parentNode.insertBefore(newRow, currSemester.previousSibling.parentNode);
+
+                    var year = document.getElementsByClassName("year")[0];
+                    for (i = 0; i < year.length; i++) {
+                        year[i].setAttribute("rowspan", parseInt(year[i].getAttribute("rowspan")) + 1);
+                    }
+            }
+        }
+        else {
+            var courseName = prevCourse[4].innerHTML.trim().split("<");
+            var creditHours = prevCourse[5].innerHTML.trim().split("<");
+            if (prevCourse[3].innerHTML === "" || courseName[0] === "" || creditHours[0] === "") {
+                prevCourse[3].innerHTML = parsedAddedClasses[selectedCourseId].num;
+                splitTextDropdown(prevCourse, parsedAddedClasses[selectedCourseId].name, 4);
+                splitTextDropdown(prevCourse, parsedAddedClasses[selectedCourseId].creditHours, 5);
+            }
+            else {
+                newRow = document.createElement("tr");
+                newRow.innerHTML += `
+                    <td class="clickable cell"></td>
+                    <td class="${0} ${0} cell"><button class="edit" id="e${i}">Edit</button></td>
+                    <td class="cell"><button class="delete">🗑️</button></td>
+                    <td class="clickable cell">${parsedAddedClasses[selectedCourseId].num}</td>
+                    <td class="${0} ${0} cell">${parsedAddedClasses[selectedCourseId].name}<button class="edit" id="e${i}">Edit</button></td>
+                    <td class="cell">${parsedAddedClasses[selectedCourseId].creditHours}<button class="delete" id="d${i}">🗑️</button></td>
+                    <td></td>`
+
+                    currSemester.parentNode.parentNode.insertBefore(newRow, currSemester.previousSibling.parentNode);
+
+                    var year = document.getElementsByClassName("year");
+                    for (i = 0; i < year.length; i++) {
+                        year[i].setAttribute("rowspan", parseInt(year[i].getAttribute("rowspan")) + 1);
+                    }
+            }
+        }
+
+        resetIds();
+
+        modal.hide();
+    }
+
+    showTable(parsedData, 1, 1, 0, 1);
+    showTable(parsedData, 2, 2, 2, 3);
+    showTable(parsedData, 3, 3, 4, 5);
+    showTable(parsedData, 4, 4, 6, 7);
 
     addCourseSelectors();
 
-    addEditButton();
-    addDeleteButton();
+    addEditButtons();
+    addDeleteButtons();
+    addAddButtons();
 }
