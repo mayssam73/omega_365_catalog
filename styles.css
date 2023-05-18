@@ -51,6 +51,7 @@ button {
 
 .new {
     margin: 2vh;
+    margin-top: 0vh;
 }
 
 .showWelcome {
@@ -63,6 +64,7 @@ button {
 
 .user, .admin {
     margin-top: 2vh;
+    margin-bottom: 2vh;
 }
 
 .btn-secondary {

@@ -480,6 +480,7 @@ window.onload = function() {
         var currSemester = document.getElementById("s" + id);
         var prevCourse = currSemester.parentElement.previousElementSibling.children;
         var newRow;
+        var yearId = Math.floor(id/2) + 1;
 
         if (id % 2 == 0) {
             var courseName = prevCourse[1].innerHTML.trim().split("<");
@@ -493,10 +494,10 @@ window.onload = function() {
                 newRow = document.createElement("tr");
                 newRow.innerHTML += `
                     <td class="clickable cell">${parsedAddedClasses[selectedCourseId].num}</td>
-                    <td class="${0} ${0} cell">${parsedAddedClasses[selectedCourseId].name}<button class="edit" id="e${i}">Edit</button></td>
+                    <td class="${yearId} ${1} cell">${parsedAddedClasses[selectedCourseId].name}<button class="edit" id="e${i}">Edit</button></td>
                     <td class="cell">${parsedAddedClasses[selectedCourseId].creditHours}<button class="delete" id="d${i}">🗑️</button></td>
                     <td class="clickable cell"></td>
-                    <td class="${0} ${0} cell"><button class="edit" id="e${i}">Edit</button></td>
+                    <td class="${yearId} ${2} cell"><button class="edit" id="e${i}">Edit</button></td>
                     <td class="cell"><button class="delete" id="d${i}">🗑️</button></td>
                     <td></td>`
 
@@ -520,10 +521,10 @@ window.onload = function() {
                 newRow = document.createElement("tr");
                 newRow.innerHTML += `
                     <td class="clickable cell"></td>
-                    <td class="${0} ${0} cell"><button class="edit" id="e${i}">Edit</button></td>
+                    <td class="${yearId} ${1} cell"><button class="edit" id="e${i}">Edit</button></td>
                     <td class="cell"><button class="delete">🗑️</button></td>
                     <td class="clickable cell">${parsedAddedClasses[selectedCourseId].num}</td>
-                    <td class="${0} ${0} cell">${parsedAddedClasses[selectedCourseId].name}<button class="edit" id="e${i}">Edit</button></td>
+                    <td class="${yearId} ${2} cell">${parsedAddedClasses[selectedCourseId].name}<button class="edit" id="e${i}">Edit</button></td>
                     <td class="cell">${parsedAddedClasses[selectedCourseId].creditHours}<button class="delete" id="d${i}">🗑️</button></td>
                     <td></td>`
 
@@ -557,6 +558,9 @@ window.onload = function() {
             welcome.classList.replace("showWelcome", "hideWelcome");
         }
 
+        var addCourseDiv = document.getElementsByClassName("showAddCourseButton")[0];
+        addCourseDiv.innerHTML = ``;
+
         showTable(parsedData, 1, 1, 0, 1);
         showTable(parsedData, 2, 2, 2, 3);
         showTable(parsedData, 3, 3, 4, 5);
@@ -568,6 +572,9 @@ window.onload = function() {
         if (welcome !== undefined) {
             welcome.classList.replace("showWelcome", "hideWelcome");
         }
+
+        var addCourseDiv = document.getElementsByClassName("showAddCourseButton")[0];
+        addCourseDiv.innerHTML = `<button class="new">Add New Course</button>`;
 
         showTable(parsedData, 1, 1, 0, 1);
         showTable(parsedData, 2, 2, 2, 3);
