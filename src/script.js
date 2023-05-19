@@ -614,6 +614,7 @@ window.onload = function() {
 
         if (!(num === "" || name === "" || creditHours === "")) {
             parsedAddedClasses.push({num, name, creditHours, prereq, description, repeatability})
+            localStorage.setItem("addedClasses", JSON.stringify(parsedAddedClasses));
             modal.hide();
         }
     }
