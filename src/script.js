@@ -341,10 +341,8 @@ window.onload = function() {
     function addClickToDelete() {
         let allDeleteBtns = document.getElementsByClassName("delete");
         for (let i = 0; i < allDeleteBtns.length; i++) {
-            allDeleteBtns[i].addEventListener("click", e => {
-                if (e.target.matches(".delete")) {
-                    deleteRow(i);
-                }
+            allDeleteBtns[i].addEventListener("click", function() {
+                deleteRow(i)
             });
         }
     }
@@ -458,7 +456,7 @@ window.onload = function() {
                 </div>
                 </div>
             </div>
-            </div>`
+        </div>`
         
         modalWrap.innerHTML = modalHTML;
         document.body.append(modalWrap);
@@ -538,8 +536,11 @@ window.onload = function() {
                     }
             }
         }
-
+        
         resetIds();
+
+        addClickToEdit();
+        addClickToDelete();
 
         modal.hide();
     }
@@ -565,12 +566,21 @@ window.onload = function() {
                 </div>
                 <div class="modal-body">
                     <form>
-                        <label for="course-num" class="col-form-label">Course Number:</label>
+                        <label for="course-num" class="col-form-label course-num-label">Course Number:</label>
                         <input required type="text" class="form-control" id="course-num">
-                        <label for="course-name" class="col-form-label">Course Name:</label>
+                        <div class="invalid-feedback" hide>
+                            Please enter a course number
+                        </div>
+                        <label for="course-name" class="col-form-label course-name-label">Course Name:</label>
                         <input required type="text" class="form-control" id="course-name">
-                        <label for="course-credit-hours" class="col-form-label">Course Credit Hours:</label>
+                        <div class="invalid-feedback" hide>
+                            Please enter a course name
+                        </div>
+                        <label for="course-credit-hours" class="col-form-label course-credit-hours-label">Course Credit Hours:</label>
                         <input required type="number" class="form-control" id="course-credit-hours">
+                        <div class="invalid-feedback" hide>
+                            Please enter a number of credit hours
+                        </div>
                         <label for="course-prereq" class="col-form-label">Course Prerequisites:</label>
                         <textarea class="form-control" id="course-prereq"></textarea>
                         <label for="course-description" class="col-form-label">Course Description:</label>
@@ -586,7 +596,7 @@ window.onload = function() {
                 </div>
                 </div>
             </div>
-            </div>`
+        </div>`
         
         modalWrap.innerHTML = modalHTML;
         document.body.append(modalWrap);
@@ -612,10 +622,28 @@ window.onload = function() {
         var description = document.getElementById("course-description").value;
         var repeatability = document.getElementById("course-repeatability").value;
 
+        checkValidity(num, "course-num-label", 0);
+        checkValidity(name, "course-name-label", 1);
+        checkValidity(creditHours, "course-credit-hours-label", 2);
+
         if (!(num === "" || name === "" || creditHours === "")) {
             parsedAddedClasses.push({num, name, creditHours, prereq, description, repeatability})
             localStorage.setItem("addedClasses", JSON.stringify(parsedAddedClasses));
             modal.hide();
+        }
+    }
+
+    function checkValidity(field, label, index) {
+        var elLabel = document.getElementsByClassName(label)[0];
+        var errorMessage = document.getElementsByClassName("invalid-feedback")[index];
+        
+        if (field == "") {
+            elLabel.classList.add("is-invalid");
+            errorMessage.classList.replace("hide", "show");
+        }
+        else if (elLabel.classList.contains("is-invalid")) {
+            elLabel.classList.remove("is-invalid");
+            errorMessage.classList.replace("show", "hide");
         }
     }
 
@@ -733,7 +761,7 @@ window.onload = function() {
                 </div>
                 </div>
             </div>
-            </div>`
+        </div>`
         
         modalWrap.innerHTML = modalHTML;
         document.body.append(modalWrap);
