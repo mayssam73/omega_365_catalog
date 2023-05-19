@@ -452,7 +452,7 @@ window.onload = function() {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary saveAdd">Save changes</button>
+                    <button type="button" class="btn btn-primary saveAdd">Add New Course</button>
                 </div>
                 </div>
             </div>
@@ -542,6 +542,80 @@ window.onload = function() {
         modal.hide();
     }
 
+    function addClickToNew() {
+        var newButton = document.getElementsByClassName("new")[0];
+        newButton.addEventListener("click", openNewModal);
+    }
+
+    function openNewModal() {
+        if (modalWrap !== null) {
+            modalWrap.remove();
+        }
+
+        modalWrap = document.createElement("div");
+        let modalHTML = `
+        <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <label for="course-num" class="col-form-label">Course Number:</label>
+                        <input required type="text" class="form-control" id="course-num">
+                        <label for="course-name" class="col-form-label">Course Name:</label>
+                        <input required type="text" class="form-control" id="course-name">
+                        <label for="course-credit-hours" class="col-form-label">Course Credit Hours:</label>
+                        <input required type="number" class="form-control" id="course-credit-hours">
+                        <label for="course-prereq" class="col-form-label">Course Prerequisites:</label>
+                        <textarea class="form-control" id="course-prereq"></textarea>
+                        <label for="course-description" class="col-form-label">Course Description:</label>
+                        <textarea class="form-control" id="course-description"></textarea>
+                        <label for="course-repeatability" class="col-form-label">Course Repeatability:</label>
+                        <input type="text" class="form-control" id="course-repeatability">
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary saveNew">Create New Course</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>`
+        
+        modalWrap.innerHTML = modalHTML;
+        document.body.append(modalWrap);
+
+        var modal = new bootstrap.Modal(document.getElementById("newModal"));
+        modal.show();
+
+        addClickToSaveNew(modal);
+    }
+
+    function addClickToSaveNew(modal) {
+        let saveBtn = document.getElementsByClassName("saveNew")[0];
+        saveBtn.addEventListener("click", function () {
+            onSaveNew(modal)
+        });
+    }
+
+    function onSaveNew(modal) {
+        var num = document.getElementById("course-num").value;
+        var name = document.getElementById("course-name").value;
+        var creditHours = document.getElementById("course-credit-hours").value;
+        var prereq = document.getElementById("course-prereq").value;
+        var description = document.getElementById("course-description").value;
+        var repeatability = document.getElementById("course-repeatability").value;
+
+        if (!(num === "" || name === "" || creditHours === "")) {
+            parsedAddedClasses.push({num, name, creditHours, prereq, description, repeatability})
+            modal.hide();
+        }
+    }
+
     function addClickToUser() {
         var userButton = document.getElementsByClassName("user")[0];
         userButton.addEventListener("click", displayUserTable);
@@ -586,6 +660,7 @@ window.onload = function() {
         addEditButtons();
         addDeleteButtons();
         addAddButtons();
+        addClickToNew();
     };
 
     addClickToUser();
