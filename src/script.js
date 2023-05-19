@@ -16,7 +16,7 @@ window.onload = function() {
         localStorage.setItem("allNewDegreePlans", JSON.stringify(allNewDegreePlans));
     }
 
-    parsedData = JSON.parse(localStorage.getItem("data"));
+    parsedData = JSON.parse(localStorage.getItem("data")).ddefault;
     let parsedCreativeArts = JSON.parse(localStorage.getItem("creativeArts"));
     let parsedNaturalSciences = JSON.parse(localStorage.getItem("naturalSciences"));
     let parsedNaturalSciencesLabs = JSON.parse(localStorage.getItem("naturalSciencesLabs"));
@@ -637,8 +637,13 @@ window.onload = function() {
         var addCourseDiv = document.getElementsByClassName("showAddCourseButton")[0];
         addCourseDiv.innerHTML = ``;
 
-        //var selectDegree = document.getElementsByClassName("selectDegree")[0];
-        //var currSelectedDegree = degreeSelect.options[degreeSelect.selectedIndex].value;
+        var selectDegree = document.getElementsByClassName("selectDegree")[0];
+        var currSelectedDegree = selectDegree.options[selectDegree.selectedIndex].value;
+        var id = "d" + currSelectedDegree;
+
+        if (currSelectedDegree !== "create") {
+            parsedData = JSON.parse(localStorage.getItem("data"))[id];
+        }
 
         showTable(parsedData, 1, 1, 0, 1);
         showTable(parsedData, 2, 2, 2, 3);
@@ -654,6 +659,14 @@ window.onload = function() {
 
         var addCourseDiv = document.getElementsByClassName("showAddCourseButton")[0];
         addCourseDiv.innerHTML = `<button class="new">Add New Course</button>`;
+
+        var selectDegree = document.getElementsByClassName("selectDegree")[0];
+        var currSelectedDegree = selectDegree.options[selectDegree.selectedIndex].value;
+        var id = "d" + currSelectedDegree;
+
+        if (currSelectedDegree !== "create") {
+            parsedData = JSON.parse(localStorage.getItem("data"))[id];
+        }
 
         showTable(parsedData, 1, 1, 0, 1);
         showTable(parsedData, 2, 2, 2, 3);
@@ -745,6 +758,20 @@ window.onload = function() {
             option.value = select.children.length - 1;
             option.text = degreePlan;
             select.add(option);
+
+            parsedData = localStorage.getItem("data")
+
+            var jsonName = "d" + option.value;
+            parsedData = parsedData.slice(0, parsedData.length - 1);
+            parsedData += ",\"" + jsonName + "\":[]}"
+
+            parsedAllNewDegreePlans.push({});
+
+            parsedAllNewDegreePlans[parsedAllNewDegreePlans.length - 1].plan = degreePlan;
+            parsedAllNewDegreePlans[parsedAllNewDegreePlans.length - 1].value = option.value;
+            
+            localStorage.setItem("data", parsedData);
+            localStorage.setItem("allNewDegreePlans", JSON.stringify(parsedAllNewDegreePlans));
 
             modal.hide();
         }
