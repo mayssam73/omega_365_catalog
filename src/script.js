@@ -13,6 +13,7 @@ window.onload = function() {
         localStorage.setItem("freeElectives1", JSON.stringify(freeElectives1));
         localStorage.setItem("coscElectives", JSON.stringify(coscElectives));
         localStorage.setItem("addedClasses", JSON.stringify(addedClasses));
+        localStorage.setItem("allNewDegreePlans", JSON.stringify(allNewDegreePlans));
     }
 
     parsedData = JSON.parse(localStorage.getItem("data"));
@@ -26,6 +27,7 @@ window.onload = function() {
     let parsedFreeElectives1 = JSON.parse(localStorage.getItem("freeElectives1"));
     let parsedCoscElectives = JSON.parse(localStorage.getItem("coscElectives"));
     let parsedAddedClasses = JSON.parse(localStorage.getItem("addedClasses"));
+    let parsedAllNewDegreePlans = JSON.parse(localStorage.getItem("allNewDegreePlans"));
 
     function showTable(parsedData, tableNum, year, firstSemId, secondSemId) {
         var totalHoursFall = 0;
@@ -435,7 +437,7 @@ window.onload = function() {
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add Course</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add New Course</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -558,7 +560,7 @@ window.onload = function() {
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add Course</h5>
+                    <h5 class="modal-title" id="addModalLabel">Create New Course</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -635,6 +637,9 @@ window.onload = function() {
         var addCourseDiv = document.getElementsByClassName("showAddCourseButton")[0];
         addCourseDiv.innerHTML = ``;
 
+        //var selectDegree = document.getElementsByClassName("selectDegree")[0];
+        //var currSelectedDegree = degreeSelect.options[degreeSelect.selectedIndex].value;
+
         showTable(parsedData, 1, 1, 0, 1);
         showTable(parsedData, 2, 2, 2, 3);
         showTable(parsedData, 3, 3, 4, 5);
@@ -663,6 +668,89 @@ window.onload = function() {
         addClickToNew();
     };
 
+    function addAllDegreesToSelect() {
+        var select = document.getElementsByClassName("selectDegree")[0];
+
+        for (i = 0; i < parsedAllNewDegreePlans.length; i++) {
+            var option = document.createElement("option");
+            option.text = parsedAllNewDegreePlans[i].plan;
+            option.value = parsedAllNewDegreePlans[i].value;
+            select.add(option);
+        }
+
+        addClickToSelectDegree();
+    }
+
+    function addClickToSelectDegree() {
+        var degreeSelect = document.getElementsByClassName("selectDegree")[0];
+        degreeSelect.addEventListener("change", addNewDegreePlan);
+    }
+
+    function addNewDegreePlan() {
+        var degreeSelect = document.getElementsByClassName("selectDegree")[0];
+        if (degreeSelect.options[degreeSelect.selectedIndex].value  === "create") {  
+            openNewDegreeModal();
+        }
+    }
+
+    function openNewDegreeModal() {
+        if (modalWrap !== null) {
+            modalWrap.remove();
+        }
+
+        modalWrap = document.createElement("div");
+        let modalHTML = `
+        <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Create New Degree Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form>
+                    <label for="new-degree" class="col-form-label">Degree Plan Name:</label>
+                    <input required type="text" class="form-control" id="new-degree">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary saveNewPlan">Create New Degree Plan</button>
+                    </div>
+                </form>
+                </div>
+                </div>
+            </div>
+            </div>`
+        
+        modalWrap.innerHTML = modalHTML;
+        document.body.append(modalWrap);
+
+        var modal = new bootstrap.Modal(document.getElementById("newModal"));
+        modal.show();
+
+        addClickToSaveNewPlan(modal);
+    }
+
+    function addClickToSaveNewPlan(modal) {
+        let saveBtn = document.getElementsByClassName("saveNewPlan")[0];
+        saveBtn.addEventListener("click", function () {
+            onSaveNewPlan(modal)
+        });
+    }
+
+    function onSaveNewPlan(modal) {
+        var select = document.getElementsByClassName("selectDegree")[0];
+        var degreePlan = document.getElementById("new-degree").value;
+        if (degreePlan !== "") {
+            var option = document.createElement("option");
+            option.value = select.children.length - 1;
+            option.text = degreePlan;
+            select.add(option);
+
+            modal.hide();
+        }
+    }
+
     addClickToUser();
     addClickToAdmin();
+    addAllDegreesToSelect();
 }
